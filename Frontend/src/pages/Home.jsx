@@ -444,14 +444,14 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row">
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20  w-full flex-1">
-                                <ul className="list-disc ">
+                                <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Bangalore To Chennai Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Mumbai To Pune Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Jaipur Bus</Link></li>
                                 </ul>
                         </div>
                         <div className="ml-4 md:ml-16 px-4 md:px-20 w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc">
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Chennai To Bangalore Bus</Link></li>
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Jaipur To Delhi Bus</Link></li>
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Chandigarh Bus</Link></li>
@@ -517,7 +517,7 @@ export default function Home() {
                 <div className="text-2xl ml-4 md:ml-16 mr-4 md:mr-16 px-4 md:px-20 py-8 font-semibold pt-3 bg-slate-100 rounded-lg ">Bus Ticket Confirmation
 
                 
-                               <ul className="list-disc list-inside ml-16 pt-3">
+                               <ul className="list-disc  ml-16 pt-3">
                                     <li className="text-slate-700 text-sm">M-Ticket: <span className="text-slate-500">M-Ticket is short for Mobile Ticket and is sent as an SMS to your mobile once you book a bus ticket. It is a confirmation of your reservation and serves as a ticket. When you board the bus, show your M-ticket to the bus crew.</span></li>
                                     <li className="text-slate-700 text-sm">E-Ticket: <span className="text-slate-500">E-Ticket stands for Electronic Ticket. The E-ticket is issued and sent to your email after you make an online bus booking. It is a confirmation of your reservation, and you can show it to the bus staff when you board the bus.</span></li>
                                     <li className="text-slate-700 text-sm">Counter-Ticket: <span className="text-slate-500"> A counter ticket is a hard copy of your bus ticket which is shown to the bus staff on boarding the bus. These can be bought physically from ticket booths or even on the bus right before your journey.</span></li>
