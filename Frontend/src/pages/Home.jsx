@@ -339,7 +339,7 @@ export default function Home() {
                 
             </div>
 
-            <div className="flex-1 flex flex-col items-left justify-left pt-8">
+            <div className="flex-1 flex flex-col items-left justify-left pt-8 w-full">
                 <div className="text-2xl ml-4 md:ml-16 mr-4 md:mr-16 px-4 md:px-20 py-8 font-semibold pt-3 bg-slate-100 rounded-lg ">Top Tourist Bus Routes
                 
                   <p className="text-sm mt-2 text-slate-500">AbhiBus is one of India's top bus reservation ticket platforms and has recently been acquired by ixigo. You can find here a list of top bus routes of AbhiBus. Travellers can reserve <Link to ="#" className="text-orange-500">bus booking</Link> online quickly and easily with AbhiBus portal or Mobile App.</p>
@@ -348,14 +348,14 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row">
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20  w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Shimla Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Goa To Mumbai Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Bangalore To Goa Bus</Link></li>
                                 </ul>
                         </div>
                         <div className="ml-4 md:ml-16 px-4 md:px-20 w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc">
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Bangalore To Ooty Bus</Link></li>
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Pune To Goa Bus</Link></li>
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Chennai To Coimbatore Bus</Link></li>
@@ -363,7 +363,7 @@ export default function Home() {
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
+                               <ul className="list-disc ">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Nainital Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Manali Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Chandigarh To Manali Bus</Link></li>
@@ -371,7 +371,7 @@ export default function Home() {
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
+                               <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Surat To Ahmedabad Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Manali To Delhi Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Dharamshala Bus</Link></li>
@@ -396,14 +396,14 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row">
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20  w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Haridwar Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Rishikesh Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Agra To Jaipur Bus</Link></li>
                                 </ul>
                         </div>
                         <div className="ml-4 md:ml-16 px-4 md:px-20 w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc">
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Katra Bus</Link></li>
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Bangalore To Tirupati Bus</Link></li>
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Amritsar Bus</Link></li>
@@ -411,7 +411,7 @@ export default function Home() {
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
+                               <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Jammu Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Chennai To Tirupati Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Jaipur To Bikaner Bus</Link></li>
@@ -419,7 +419,7 @@ export default function Home() {
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
+                               <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Mumbai To Shirdi Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Kolkata To Digha Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Hyderabad To Tirupati Bus</Link></li>
@@ -444,7 +444,7 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row">
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20  w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc ">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Bangalore To Chennai Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Mumbai To Pune Bus</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Delhi To Jaipur Bus</Link></li>
@@ -459,18 +459,18 @@ export default function Home() {
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
-                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Mumbai To Goa Bus</Link></li>
-                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Hyderabad To Goa Bus</Link></li>
-                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Chandigarh To Delhi Bus</Link></li>
+                               <ul className="list-disc">
+                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 ">Mumbai To Goa Bus</Link></li>
+                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 ">Hyderabad To Goa Bus</Link></li>
+                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 ">Chandigarh To Delhi Bus</Link></li>
                                 </ul>
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
-                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Indore To Bhopal Bus</Link></li>
-                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Hyderabad To Chennai Bus</Link></li>
-                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Pune To Hyderabad Bus</Link></li>
+                               <ul className="list-disc">
+                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500">Indore To Bhopal Bus</Link></li>
+                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500">Hyderabad To Chennai Bus</Link></li>
+                                    <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500">Pune To Hyderabad Bus</Link></li>
                                 </ul>
                         </div>
 
@@ -552,14 +552,14 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row">
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20  w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc ">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">APSRTC</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">TSRTC</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">DGSRTC</Link></li>
                                 </ul>
                         </div>
                         <div className="ml-4 md:ml-16 px-4 md:px-20 w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc">
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Kerala RTC</Link></li>
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">HRTC</Link></li>
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">BSRTC</Link></li>
@@ -567,7 +567,7 @@ export default function Home() {
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
+                               <ul className="list-disc ">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">TNSTC</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">RSRTC</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">MSRTC</Link></li>
@@ -575,7 +575,7 @@ export default function Home() {
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
+                               <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">OSRTC</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Karnataka RTC</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">UPSRTC</Link></li>
@@ -583,7 +583,7 @@ export default function Home() {
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
+                               <ul className="list-disc ">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">PRTC</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">JKSRTC</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">WBTC</Link></li>
@@ -597,14 +597,14 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row">
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20  w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">VRL Travels</Link></li>
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">SRS Travels</Link></li>
                                  
                                 </ul>
                         </div>
                         <div className="ml-4 md:ml-16 px-4 md:px-20 w-full flex-1">
-                                <ul className="list-disc list-inside">
+                                <ul className="list-disc ">
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Parveen Travels</Link></li>
                                             <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Kaveri Travels</Link></li>
                                          
@@ -612,7 +612,7 @@ export default function Home() {
                         </div>
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
+                               <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">KPN Travels</Link></li>
                                    
                                 </ul>
@@ -621,7 +621,7 @@ export default function Home() {
                       
 
                         <div className="ml-4 md:ml-16 px-4 md:px-20 pb-8 w-full flex-1">
-                               <ul className="list-disc list-inside">
+                               <ul className="list-disc">
                                     <li className="text-slate-500 text-sm"><Link to="#" className="text-orange-500 text-sm">Morning Star Travels</Link></li>
                                 </ul>
                         </div>

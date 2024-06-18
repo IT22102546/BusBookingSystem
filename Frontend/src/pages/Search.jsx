@@ -31,6 +31,7 @@ export default function SearchBus() {
     setSideBarData({
       startStation: startStation ? decodeURIComponent(startStation) : "",
       toStation: toStation ? decodeURIComponent(toStation) : "",
+      date: new Date().toISOString().split("T")[0],
       
     });
 
