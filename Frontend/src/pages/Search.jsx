@@ -7,7 +7,6 @@ export default function SearchBus() {
   const [sideBarData, setSideBarData] = useState({
     startStation: "",
     toStation: "",
-  
   });
 
   const [filters, setFilters] = useState({
@@ -26,13 +25,11 @@ export default function SearchBus() {
     const urlParams = new URLSearchParams(location.search);
     const startStation = urlParams.get("startStation");
     const toStation = urlParams.get("toStation");
-   
 
     setSideBarData({
       startStation: startStation ? decodeURIComponent(startStation) : "",
       toStation: toStation ? decodeURIComponent(toStation) : "",
       date: new Date().toISOString().split("T")[0],
-      
     });
 
     const fetchBuses = async () => {
@@ -84,12 +81,12 @@ export default function SearchBus() {
 
   return (
     <div className="flex flex-col">
-      <div className="p-7 border-b border-gray-500 flex justify-center items-center text-center bg-pink-800 h-10">
-        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-8">
-          <div className="flex items-center gap-2">
+      <div className="p-4 border-b border-gray-500 flex flex-col md:flex-row justify-center items-center text-center bg-blue-500">
+        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 md:gap-8 w-full max-w-4xl">
+          <div className="flex flex-col md:flex-row items-center gap-2 w-full">
             <label className="whitespace-nowrap font-cinzel font-semibold">From:</label>
             <Select
-              className="w-60"
+              className="w-full md:w-60"
               id="startStation"
               value={sideBarData.startStation}
               onChange={handleChange}
@@ -97,13 +94,13 @@ export default function SearchBus() {
               <option value="Hyderabad">Hyderabad</option>
               <option value="Bangalore">Bangalore</option>
               <option value="Chennai">Chennai</option>
-              <option value="Gova">Goa</option>
+              <option value="Goa">Goa</option>
             </Select>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col md:flex-row items-center gap-2 w-full">
             <label className="whitespace-nowrap font-cinzel font-semibold">To:</label>
             <Select
-              className="w-60"
+              className="w-full md:w-60"
               id="toStation"
               value={sideBarData.toStation}
               onChange={handleChange}
@@ -111,28 +108,30 @@ export default function SearchBus() {
               <option value="Hyderabad">Hyderabad</option>
               <option value="Bangalore">Bangalore</option>
               <option value="Chennai">Chennai</option>
-              <option value="Gova">Goa</option>
+              <option value="Goa">Goa</option>
             </Select>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col md:flex-row items-center gap-2 w-full">
             <label className="whitespace-nowrap font-cinzel font-semibold">Date:</label>
             <TextInput
-              className="w-60"
+              className="w-full md:w-60"
               id="date"
               type="date"
               value={sideBarData.date}
               onChange={handleChange}
             />
           </div>
-          <Button type="submit" className="bg-orange-500">
-            Search Buses
-          </Button>
+          <div className="p-2 w-full md:w-auto">
+                    <Button type="submit" className="bg-orange-500 w-full">
+                        Search
+                    </Button>
+           </div>
         </form>
       </div>
 
       <div className="flex flex-col md:flex-row mt-5">
-        <div className="w-96 md:w-1/5 p-4 border-r border-gray-500">
-          <h2 className="text-2xl font-semibold mb-4 ">Filters</h2>
+        <div className="w-full md:w-1/5 p-4 border-r border-gray-500">
+          <h2 className="text-2xl font-semibold mb-4">Filters</h2>
           <div className="flex flex-col gap-4">
             <div>
               <h3 className="font-semibold">Price Range</h3>
@@ -141,9 +140,7 @@ export default function SearchBus() {
                 min="500"
                 max="5000"
                 value={filters.priceRange}
-                onChange={(e) =>
-                  handleFilterChange("priceRange", e.target.value)
-                }
+                onChange={(e) => handleFilterChange("priceRange", e.target.value)}
                 className="w-full"
                 id="priceRange"
               />
@@ -206,9 +203,7 @@ export default function SearchBus() {
         </div>
 
         <div className="w-full md:w-4/5">
-          <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3">
-            Results
-          </h1>
+          <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3">Results</h1>
           <div className="p-7 flex flex-wrap gap-4">
             {loading ? (
               <p className="text-xl text-gray-500">Loading...</p>

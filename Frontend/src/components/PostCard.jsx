@@ -1,61 +1,64 @@
-/* eslint-disable react/prop-types */
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function PostCard({ bus }) {
+export default function PostCard({ bus = {} }) {
+  const {
+    type = 'N/A',
+    company = 'N/A',
+    startStation = 'N/A',
+    toStation = 'N/A',
+    depatureTime = 'N/A',
+    arrivalTime = 'N/A',
+    travelTime = 'N/A',
+    price = 0,
+    seat = 0,
+    seatLayout = 'N/A',
+    rating = 0,
+    availability='N/A'
+  } = bus;
+
   return (
-    <div className="group relative border border-teal-500 hover:border-2 h-auto overflow-hidden rounded-lg transition-all w-full p-4 flex flex-col justify-between  bg-slate-50" 
-  >
+    <div className="group relative border border-gray-300 h-auto overflow-hidden rounded-lg transition-all w-full md:w-4/5 p-6 flex flex-col justify-between bg-white shadow-lg">
       <div className="flex flex-col gap-2">
-        <div className="flex justify-between">
-          <p className="text-lg font-semibold">{bus.company}</p>
-          <span className="text-sm italic font-bold  ">{bus.type}</span>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+          <span className="text-lg font-bold">{type} - {company} - {startStation} - {toStation}</span>
         </div>
-        <div className="flex justify-between items-center mt-2">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
           <div className="flex items-center gap-1">
-            <span className="font-semibold">Starting at:</span>
-            <span className="text-slate-400">{bus.startStation}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <span className="font-semibold">End point:</span>
-            <span className="text-slate-400">{bus.toStation}</span>
+            <span className="font-semibold text-slate-500 text-sm">Seat Layout:</span>
+            <span className="text-slate-500 text-sm">{seatLayout}</span>
           </div>
         </div>
-        <div className="flex justify-between items-center mt-2">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
           <div className="flex items-center gap-1">
-            <span className="font-semibold">Departure:</span>
-            <span className="text-slate-400"> {bus.depatureTime}</span>
+            <img src="/img/bus.png" className="w-5 h-6 mr-2" alt="Bus icon" />
+            <span className="font-semibold text-md text-yellow-400">{type} - {company}</span>
           </div>
-          <div className="flex items-center gap-1">
-            <span className="font-semibold">Arrival:</span>
-            <span className="text-slate-400">{bus.arrivalTime}</span>
+          <div className="flex items-center gap-1 mt-2 sm:mt-0">
+            <span className="text-blue-700 font-semibold text-lg">Rs.{price}</span>
           </div>
         </div>
-        <div className="flex justify-between items-center mt-2">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
           <div className="flex items-center gap-1">
-            <span className="font-semibold "></span>
-            <span></span>
+            <span className="font-semibold">{depatureTime}</span>
+            <img src="/img/rightarrow.png" className="w-5 h-5 mx-2" alt="Arrow icon" />
+            <span className="font-semibold">{arrivalTime}</span>
           </div>
-          <div className="flex items-center gap-1">
-            <span className="font-semibold">Price:</span>
-            <span className="text-slate-400">Rs.{bus.price}</span>
+          <div className="flex items-center gap-1 mt-2 sm:mt-0">
+            <span className="text-slate-500 text-sm">{availability}</span>
           </div>
         </div>
       </div>
-
-      <div className="flex justify-between items-center mt-2">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
         <div className="flex items-center gap-1">
-          <span className="font-semibold ">Rating:</span>
-          <span className="text-slate-400">{bus.rating}</span>
+          <span className="font-semibold text-sm text-slate-500">{startStation}</span>
+          <span className="font-semibold text-sm text-slate-500 mx-4">{travelTime} min</span>
+          <span className="font-semibold text-sm text-slate-500">{toStation}</span>
         </div>
-        <div className="flex items-center gap-1">
-           <button className="bg-orange-500 text-white px-4 py-2 rounded mt-4 self-end">Book Now</button>
-        </div>
-     </div>
-      
+      </div>
+      <div className="flex justify-end items-center mt-4">
+        <button className="bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+      </div>
     </div>
   );
 }
-
-
-
-
-

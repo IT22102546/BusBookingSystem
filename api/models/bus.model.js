@@ -43,11 +43,25 @@ const productSchema = new mongoose.Schema(
         type: String,
         required: true,
     },
+
+    travelTime:{
+      type: String,
+      required: true,
+  },
+
+  seatLayout:{
+    type: String,
+    required: true,
+},
    
     
     rating:{
         type:Number
     },
+
+    availability:{
+      type:String
+  },
    
 
    
