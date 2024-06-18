@@ -1,14 +1,12 @@
-
+import { Alert, Button,  Modal, TextInput } from "flowbite-react";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { app } from "../firebase";
 import { CircularProgressbar } from 'react-circular-progressbar';
+import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signOut, updateUserFailure, updateUserStart, updateUserSuccess } from "../redux/user/userSlice";
 import  { HiOutlineExclamationCircle } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import { app } from "../firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
-import { Alert, Button, Modal, TextInput } from "flowbite-react";
-import { deleteUserFailure, deleteUserStart, deleteUserSuccess, updateUserFailure, updateUserStart, updateUserSuccess } from "../redux/user/userSlice";
-import { signOut } from "../redux/user/userSlice";
-import { getDownloadURL, getStorage , ref, uploadBytesResumable } from "firebase/storage";
 
 export default function DashProfile() {
   const dispatch = useDispatch();
@@ -128,128 +126,124 @@ export default function DashProfile() {
   }
   const handleSignOut = async () => {
     try {
-        await fetch('/api/user/signout');
-        dispatch(signOut());
-        navigate('/');
+      await fetch('/api/user/signout');
+      dispatch(signOut());
+      navigate('/');
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-}
+  };
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
 };
-
-  return (
-    <div className='max-w-lg mx-auto p-3 w-full'>
+return (
+  <div className='max-w-lg mx-auto p-3 w-full'>
       <h1 className='my-7 text-center font-semibold text-3xl'>Profile</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input
-          type='file'
-          accept='image/*'
-          onChange={handleImageChange}
-          ref={filePickerRef}
-          hidden
-        />
-        <div
-          className='relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'
-          onClick={() => filePickerRef.current.click()}
-        >
-          {imagePercent > 0 && imagePercent < 100 && (
-            <CircularProgressbar
-              value={imagePercent}
-              text={`${imagePercent}%`}
-              strokeWidth={5}
-              styles={{
-                root: {
-                  width: '100%',
-                  height: '100%',
-                  position: 'absolute',
-                },
-                path: {
-                  stroke: `rgba(62, 152, 199, ${imagePercent / 100})`,
-                },
-              }}
-              aria-label='Uploading Image'
-            />
-          )}
-          <img
-            src={imageFileUrl || currentUser.profilePicture}
-            alt='user'
-            className={`rounded-full w-full h-full border-8 border-[lightgray] ${imagePercent && imagePercent < 100 ? 'opacity-60' : ''}`}
-            aria-label='User Profile Image'
+          <input
+              type='file'
+              accept='image/*'
+              onChange={handleImageChange}
+              ref={filePickerRef}
+              hidden
           />
-        </div>
-        {imageError && (
-          <Alert color='failure'>{imageError}</Alert>
-        )}
+          <div
+              className='relative w-32 h-32 self-center cursor-pointer shadow-md overflow-hidden rounded-full'
+              onClick={() => filePickerRef.current.click()}
+          >
+              {imagePercent > 0 && imagePercent < 100 && (
+                  <CircularProgressbar
+                      value={imagePercent}
+                      text={`${imagePercent}%`}
+                      strokeWidth={5}
+                      styles={{
+                          root: {
+                              width: '100%',
+                              height: '100%',
+                              position: 'absolute',
+                          },
+                          path: {
+                              stroke: `rgba(62, 152, 199, ${imagePercent / 100})`,
+                          },
+                      }}
+                      aria-label='Uploading Image'
+                  />
+              )}
+              <img
+                  src={imageFileUrl || currentUser.profilePicture}
+                  alt='user'
+                  className={`rounded-full w-full h-full border-8 border-[lightgray] ${imagePercent && imagePercent < 100 ? 'opacity-60' : ''}`}
+                  aria-label='User Profile Image'
+              />
+          </div>
+          {imageError && <Alert color='failure'>{imageError}</Alert>}
 
-        <TextInput
-          type='text'
-          id='username'
-          placeholder='username'
-          defaultValue={currentUser.username} onChange={handleChange}
-        />
-        <TextInput
-          type='text'
-          id='firstname'
-          placeholder='firstname'
-          defaultValue={currentUser.firstname} onChange={handleChange}
-        />
-        <TextInput
-          type='text'
-          id='lastname'
-          placeholder='lastname'
-          defaultValue={currentUser.lastname} onChange={handleChange}
-        />
-        <TextInput
-          type='email'
-          id='email'
-          placeholder='email'
-          defaultValue={currentUser.email}onChange={handleChange}
-        />
-         <TextInput
-          type='text'
-          id='mobile'
-          placeholder='mobile'
-          defaultValue={currentUser.mobile} onChange={handleChange}
-        />
-        <div>
-                           
-                            <div className="relative">
-                                <TextInput type={showPassword ? "text" : "password"} placeholder="Password" id="password" onChange={handleChange}/>
-                                    <button type="button" className="absolute top-2 right-3 focus:outline-none" onClick={togglePasswordVisibility}>
-                                        {showPassword ? (
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.818 8.818a4 4 0 0 1 0 6.364M5.636 8.818a4 4 0 0 1 0 6.364M11.998 5.996v.01" />
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18.1V12a3.999 3.999 0 0 1 3.999-4 3.999 3.999 0 0 1 3.999 4v6.1c0 2.21-1.791 4-3.999 4a3.999 3.999 0 0 1-3.999-4z" />
-                                            </svg>
-                                        ) : (
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 15a7 7 0 01-7-7M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                        )}
-                                    </button>
+          <TextInput
+              type='text'
+              id='username'
+              placeholder='username'
+              defaultValue={currentUser.username}
+              onChange={handleChange}
+          />
+          <TextInput
+              type='text'
+              id='firstname'
+              placeholder='firstname'
+              defaultValue={currentUser.firstname}
+              onChange={handleChange}
+          />
+          <TextInput
+              type='text'
+              id='lastname'
+              placeholder='lastname'
+              defaultValue={currentUser.lastname}
+              onChange={handleChange}
+          />
+          <TextInput
+              type='email'
+              id='email'
+              placeholder='email'
+              defaultValue={currentUser.email}
+              onChange={handleChange}
+          />
+          <TextInput
+              type='text'
+              id='mobile'
+              placeholder='mobile'
+              defaultValue={currentUser.mobile}
+              onChange={handleChange}
+          />
+          <div className='relative'>
+              <TextInput type={showPassword ? 'text' : 'password'} placeholder='Password' id='password' onChange={handleChange} />
+              <button type='button' className='absolute top-2 right-3 focus:outline-none' onClick={togglePasswordVisibility}>
+                  {showPassword ? (
+                      <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6 text-gray-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15.818 8.818a4 4 0 0 1 0 6.364M5.636 8.818a4 4 0 0 1 0 6.364M11.998 5.996v.01' />
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M12 18.1V12a3.999 3.999 0 0 1 3.999-4 3.999 3.999 0 0 1 3.999 4v6.1c0 2.21-1.791 4-3.999 4a3.999 3.999 0 0 1-3.999-4z' />
+                      </svg>
+                  ) : (
+                      <svg xmlns='http://www.w3.org/2000/svg' className='h-6 w-6 text-gray-500' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' />
+                          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M11 15a7 7 0 01-7-7M21 12a9 9 0 11-18 0 9 9 0 0118 0z' />
+                      </svg>
+                  )}
+              </button>
+          </div>
 
-                            </div>
-                        </div>
-        <Button
-          type='submit'
-          className='bg-orange-500'
-          disabled={loading }
-        >
-          {loading ? 'Loading..' : 'Update Account'}
-        </Button>
-        
+          <Button type='submit' className='bg-orange-500' disabled={loading}>
+              {loading ? 'Loading..' : 'Update Account'}
+          </Button>
       </form>
+
       <div className='text-red-500 flex justify-between mt-5'>
-      <span onClick={()=>setShowModel(true)} className='cursor-pointer' >
-        Delete Account
-      </span>
-        <span onClick={handleSignOut} className='cursor-pointer'>
-          Sign Out
-        </span>
+          <span onClick={() => setShowModel(true)} className='cursor-pointer'>
+              Delete Account
+          </span>
+          <span onClick={handleSignOut} className='cursor-pointer'>
+              Sign Out
+          </span>
       </div>
+
       {updateSuccess && (
         <Alert color='success' className='mt-5'>
           {updateSuccess}
@@ -260,7 +254,7 @@ export default function DashProfile() {
           {updateUserError}
         </Alert>
       )}
-      <Modal show={showModel} onClose={()=>setShowModel(false)} popup size='md'>
+      <Modal show={showModel} onClose={()=>setShowModel(false)} popup size='md' className="items-center py-60 pl-52">
           <Modal.Header/>
           <Modal.Body>
             <div className="text-center">
@@ -277,8 +271,8 @@ export default function DashProfile() {
             </div>
           </Modal.Body>
       </Modal>
-    
-    </div>
-   
-  );
+
+  </div>
+);
+
 }

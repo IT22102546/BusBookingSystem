@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import authRoute from "./routes/auth.route.js"
 import bushRoute from "./routes/buses.route.js"
+import userRoute from "./routes/user.route.js"
+import cookieParser from 'cookie-parser';
+
+
 
 dotenv.config();
 
@@ -14,6 +18,8 @@ mongoose.connect(process.env.MONGO).then(()=>{
 
 
 const app = express();
+app.use(cookieParser());
+
 app.use(express.json());
 
 app.listen(3000,()=>{
@@ -22,3 +28,15 @@ app.listen(3000,()=>{
 
 app.use("/api/auth",authRoute);
 app.use("/api/buses",bushRoute);
+app.use("/api/user",userRoute);
+
+app.use((err,req,res,next)=>{
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    return res.status(statusCode).json({
+        success:false,
+        message,
+        statusCode
+    });
+})
+
