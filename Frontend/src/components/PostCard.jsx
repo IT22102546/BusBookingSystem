@@ -40,8 +40,8 @@ export default function PostCard({ bus = {} }) {
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
           <div className="flex items-center gap-1">
-            <span className="font-semibold">{depatureTime}</span>
-            <img src="/img/rightarrow.png" className="w-5 h-5 mx-2" alt="Arrow icon" />
+            <span className="font-semibold ml-16">{depatureTime}</span>
+            <span className='ml-4'><img src="/img/rightarrow.png" className="w-5 h-7 mx-2" alt="Arrow icon" /></span>
             <span className="font-semibold">{arrivalTime}</span>
           </div>
           <div className="flex items-center gap-1 mt-2 sm:mt-0">
@@ -51,7 +51,7 @@ export default function PostCard({ bus = {} }) {
       </div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
         <div className="flex items-center gap-1">
-          <span className="font-semibold text-sm text-slate-500">{startStation}</span>
+          <span className="font-semibold text-sm text-slate-500 ml-16">{startStation}</span>
           <span className="font-semibold text-sm text-slate-500 mx-4">{travelTime} min</span>
           <span className="font-semibold text-sm text-slate-500">{toStation}</span>
         </div>

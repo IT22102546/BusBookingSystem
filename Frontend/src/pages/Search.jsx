@@ -66,7 +66,7 @@ export default function SearchBus() {
     const urlParams = new URLSearchParams();
     urlParams.set("startStation", encodeURIComponent(sideBarData.startStation));
     urlParams.set("toStation", encodeURIComponent(sideBarData.toStation));
-    urlParams.set("date", sideBarData.date);
+
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
@@ -94,7 +94,7 @@ export default function SearchBus() {
               <option value="Hyderabad">Hyderabad</option>
               <option value="Bangalore">Bangalore</option>
               <option value="Chennai">Chennai</option>
-              <option value="Goa">Goa</option>
+              <option value="Gova">Goa</option>
             </Select>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-2 w-full">
@@ -108,7 +108,7 @@ export default function SearchBus() {
               <option value="Hyderabad">Hyderabad</option>
               <option value="Bangalore">Bangalore</option>
               <option value="Chennai">Chennai</option>
-              <option value="Goa">Goa</option>
+              <option value="Gova">Goa</option>
             </Select>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-2 w-full">
