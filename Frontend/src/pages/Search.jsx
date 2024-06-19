@@ -66,8 +66,8 @@ export default function SearchBus() {
         type,
         departureTime: depTime,
         company,
-        minPrice: filters.priceRange[0], // include minPrice in the query
-        maxPrice: filters.priceRange[1], // include maxPrice in the query
+        minPrice: filters.priceRange[0], 
+        maxPrice: filters.priceRange[1], 
       }).toString();
 
       const res = await fetch(`/api/buses/getbuses?${searchQuery}`);
@@ -191,7 +191,7 @@ export default function SearchBus() {
       } else if (sortBy === "price") {
         return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
       }
-      return 0; // Default: no sorting
+      return 0; 
     });
   };
   
@@ -246,38 +246,45 @@ export default function SearchBus() {
         </form>
       </div>
 
-      <div className="flex justify-center items-center bg-gray-200 p-4">
-        <div className="flex gap-4">
-          <button
-            className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "departureTime" ? "bg-blue-200" : ""}`}
-            onClick={() => handleSortChange("departureTime")}
-          >
-            Departure Time
-            {sortBy === "departureTime" && (
-              <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
-            )}
-          </button>
-          <button
-            className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "arrivingTime" ? "bg-blue-200" : ""}`}
-            onClick={() => handleSortChange("arrivalTime")}
-          >
-            Arriving Time
-            {sortBy === "arrivalTime" && (
-              <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
-            )}
-          </button>
-         
-          <button
-            className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "price" ? "bg-blue-200" : ""}`}
-            onClick={() => handleSortChange("price")}
-          >
-            Price
-            {sortBy === "price" && (
-              <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
-            )}
-          </button>
-        </div>
-      </div>
+      <div className="flex flex-col sm:flex-row justify-between items-center bg-blue-100 p-4 font-cinzel ">
+  <div className="flex items-center mb-2 sm:mb-0">
+    <div className="text-lg font-bold mr-5">Sorting By:</div>
+    <div className="flex gap-4">
+      <button
+        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "departureTime" ? "bg-blue-200" : ""}`}
+        onClick={() => handleSortChange("departureTime")}
+      >
+        Departure Time
+        {sortBy === "departureTime" && (
+          <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
+        )}
+      </button>
+      <button
+        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "arrivalTime" ? "bg-blue-200" : ""}`}
+        onClick={() => handleSortChange("arrivalTime")}
+      >
+        Arriving Time
+        {sortBy === "arrivalTime" && (
+          <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
+        )}
+      </button>
+      <button
+        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "price" ? "bg-blue-200" : ""}`}
+        onClick={() => handleSortChange("price")}
+      >
+        Price
+        {sortBy === "price" && (
+          <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
+        )}
+      </button>
+    </div>
+  </div>
+  <div className="flex items-center text-orange-400">
+    <img src="/img/bus.png" className="w-5 h-6 mr-2" alt="Bus icon" />
+    <span className="text-lg font-semibold"> Showing {buses.length} Buses on this Route </span>
+  </div>
+</div>
+
 
       <div className="flex flex-col md:flex-row mt-5">
         <div className="w-full md:w-1/5 p-4 border-r border-gray-500 bg-gray-200">
