@@ -21,9 +21,29 @@ export default function SearchBus() {
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState("departureTime");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [startStations, setStartStations] = useState([]);
+  const [toStations, setToStations] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const res = await fetch("/api/buses/stations");
+        if (!res.ok) {
+          throw new Error("Failed to fetch stations");
+        }
+        const data = await res.json();
+        setStartStations(data.startStations || []);
+        setToStations(data.toStations || []);
+      } catch (error) {
+        console.error("Error fetching stations:", error);
+      }
+    };
+
+    fetchStations();
+  }, []);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -208,10 +228,11 @@ export default function SearchBus() {
               value={sideBarData.startStation}
               onChange={handleChange}
             >
-              <option value="Hyderabad">Hyderabad</option>
-              <option value="Bangalore">Bangalore</option>
-              <option value="Chennai">Chennai</option>
-              <option value="Gova">Goa</option>
+              {startStations.map((station, index) => (
+                <option key={index} value={station}>
+                  {station}
+                </option>
+              ))}
             </Select>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-2 w-full">
@@ -222,10 +243,11 @@ export default function SearchBus() {
               value={sideBarData.toStation}
               onChange={handleChange}
             >
-              <option value="Hyderabad">Hyderabad</option>
-              <option value="Bangalore">Bangalore</option>
-              <option value="Chennai">Chennai</option>
-              <option value="Gova">Goa</option>
+              {toStations.map((station, index) => (
+                <option key={index} value={station}>
+                  {station}
+                </option>
+              ))}
             </Select>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-2 w-full">

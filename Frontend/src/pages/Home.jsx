@@ -57,6 +57,27 @@ export default function Home() {
     const [isLastSlide, setIsLastSlide] = useState(false);
     const carouselRef = useRef(null);
     const navigate = useNavigate(); 
+    const [startStations, setStartStations] = useState([]);
+    const [toStations, setToStations] = useState([]);
+  
+
+    useEffect(() => {
+        const fetchStations = async () => {
+          try {
+            const res = await fetch("/api/buses/stations");
+            if (!res.ok) {
+              throw new Error("Failed to fetch stations");
+            }
+            const data = await res.json();
+            setStartStations(data.startStations || []);
+            setToStations(data.toStations || []);
+          } catch (error) {
+            console.error("Error fetching stations:", error);
+          }
+        };
+    
+        fetchStations();
+      }, []);
 
     const [sideBarData, setSideBarData] = useState({
         startStation: "Gova",
@@ -150,28 +171,30 @@ export default function Home() {
                 <form className="flex flex-col md:flex-row bg-white h-auto md:h-28 w-full max-w-5xl rounded-md items-center p-4 shadow-md" onSubmit={handleSearch}>
                     <div className="flex-1 p-2 w-full">
                     <Select
+                        className="w-full md:w-60"
                         id="startStation"
                         value={sideBarData.startStation}
                         onChange={handleChange}
-                    >
-                        <option value="Hyderabad">Hyderabad</option>
-                        <option value="Bangalore">Bangalore</option>
-                        <option value="Chennai">Chennai</option>
-                        <option value="Gova">Goa</option>
+                        >
+                        {startStations.map((station, index) => (
+                            <option key={index} value={station}>
+                            {station}
+                            </option>
+                        ))}
                     </Select>
                     </div>
                     <div className="flex-1 p-2 w-full">
-                    <select
+                    <Select
+                        className="w-full md:w-60"
                         id="toStation"
-                        className="rounded-md w-full"
-                        value={sideBarData.toStation}
                         onChange={handleChange}
-                    >
-                        <option value="Hyderabad">Hyderabad</option>
-                        <option value="Bangalore">Bangalore</option>
-                        <option value="Chennai">Chennai</option>
-                        <option value="Gova">Goa</option>
-                    </select>
+                        >
+                        {toStations.map((station, index) => (
+                            <option key={index} value={station}>
+                            {station}
+                            </option>
+                        ))}
+                    </Select>
                     </div>
                     <div className="flex-1 p-2 w-full">
                     <input

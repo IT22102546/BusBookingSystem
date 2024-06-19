@@ -48,3 +48,14 @@ export const getBuses = async (req, res, next) => {
     next(error);
   }
 };
+
+
+export const getStations = async (req, res, next) => {
+  try {
+    const startStations = await Bus.distinct("startStation");
+    const toStations = await Bus.distinct("toStation");
+    res.status(200).json({ startStations, toStations });
+  } catch (error) {
+    next(error);
+  }
+};
