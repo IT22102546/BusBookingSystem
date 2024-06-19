@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+/* eslint-disable react/prop-types */
+
 
 export default function PostCard({ bus = {} }) {
   const {
@@ -7,7 +7,7 @@ export default function PostCard({ bus = {} }) {
     company = 'N/A',
     startStation = 'N/A',
     toStation = 'N/A',
-    depatureTime = 'N/A',
+    departureTime = 'N/A',
     arrivalTime = 'N/A',
     travelTime = 'N/A',
     price = 0,
@@ -40,9 +40,9 @@ export default function PostCard({ bus = {} }) {
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
           <div className="flex items-center gap-1">
-            <span className="font-semibold ml-16">{depatureTime}</span>
-            <span className='ml-4'><img src="/img/rightarrow.png" className="w-5 h-7 mx-2" alt="Arrow icon" /></span>
-            <span className="font-semibold">{arrivalTime}</span>
+            <span className="font-semibold ml-16">{departureTime}</span>
+            <span className='ml-4'><img src="/img/rightarrow.png" className="w-10 h-7 mx-2" alt="Arrow icon" /></span>
+            <span className="font-semibold ml-3">{arrivalTime}</span>
           </div>
           <div className="flex items-center gap-1 mt-2 sm:mt-0">
             <span className="text-slate-500 text-sm">{availability}</span>
@@ -51,7 +51,7 @@ export default function PostCard({ bus = {} }) {
       </div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
         <div className="flex items-center gap-1">
-          <span className="font-semibold text-sm text-slate-500 ml-16">{startStation}</span>
+          <span className="font-semibold text-sm text-slate-500 ml-12">{startStation}</span>
           <span className="font-semibold text-sm text-slate-500 mx-4">{travelTime} min</span>
           <span className="font-semibold text-sm text-slate-500">{toStation}</span>
         </div>

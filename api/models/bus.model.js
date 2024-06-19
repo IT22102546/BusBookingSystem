@@ -39,11 +39,10 @@ const productSchema = new mongoose.Schema(
       required: true,
       
     },
-    depatureTime:{
-        type: String,
-        required: true,
+    departureTime: {
+      type: String,
+      required: true, 
     },
-
     travelTime:{
       type: String,
       required: true,
