@@ -50,7 +50,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [startStations, setStartStations] = useState([]);
   const [toStations, setToStations] = useState([]);
-
+  
   useEffect(() => {
     const fetchStations = async () => {
       try {
@@ -65,9 +65,10 @@ export default function Home() {
         console.error("Error fetching stations:", error);
       }
     };
-
+  
     fetchStations();
   }, []);
+  
 
   const [sideBarData, setSideBarData] = useState({
     startStation: "Gova",
@@ -79,8 +80,11 @@ export default function Home() {
     setSideBarData((prevData) => ({
       ...prevData,
       date: today,
+      startStation: startStations.length > 0 ? startStations[0] : '',
+      toStation: toStations.length > 0 ? toStations[0] : '',
     }));
-  }, []);
+  }, [startStations,toStations]);
+  
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -95,6 +99,7 @@ export default function Home() {
     const { startStation, toStation } = sideBarData;
     navigate(`/search?startStation=${startStation}&toStation=${toStation}`);
   };
+  
 
   const moveCarousel = (n, ref, setSlideIndex, setIsFirstSlide, setIsLastSlide) => {
     const carousel = ref.current;
@@ -173,7 +178,7 @@ export default function Home() {
                 <div className="flex items-center justify-center mt-6 w-full px-4 md:px-0">
                 <form className="flex flex-col md:flex-row bg-white h-auto md:h-28 w-full max-w-5xl rounded-md items-center p-4 shadow-md" onSubmit={handleSearch}>
                     <div className="flex-1 p-2 w-full">
-                    <Select
+                     <Select
                         className="w-full md:w-60"
                         id="startStation"
                         value={sideBarData.startStation}
@@ -184,12 +189,13 @@ export default function Home() {
                             {station}
                             </option>
                         ))}
-                    </Select>
+                        </Select>
                     </div>
                     <div className="flex-1 p-2 w-full">
                     <Select
                         className="w-full md:w-60"
                         id="toStation"
+                        value={sideBarData.toStation}
                         onChange={handleChange}
                         >
                         {toStations.map((station, index) => (
@@ -217,62 +223,61 @@ export default function Home() {
                 </div>
             </div>
             
-            <div className="flex-1 flex flex-col items-left justify-left">
+            <div className="flex-1 flex flex-col items-left justify-left pb-5">
         <div className="text-2xl ml-4 md:ml-16 px-4 md:px-20 py-8 font-semibold">Bus Booking Discount Offers</div>
-        <div className=" px-4 md:px-20 pb-8 w-full">
+        <div className="px-4 md:px-20 pb-8 w-full">
           <div className="relative">
             <div ref={carouselRef1} className="carousel flex transition-transform duration-500 ease-in-out overflow-hidden">
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 1" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72 ">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 2" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 3" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 4" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 5" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 6" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 7" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 8" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 9" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              <div className="card flex-none mr-6">
+              <div className="card flex-none mr-6 w-72">
                 <Link to="">
                   <img src="/img/dis1.jpg" alt="Offer 10" className="w-full h-44 rounded-md shadow-md" />
                 </Link>
               </div>
-              {/* Add more cards as needed */}
             </div>
             {showNavButtons1 && (
               <div className="absolute inset-y-0 flex items-center justify-between w-full px-4">
@@ -302,60 +307,59 @@ export default function Home() {
         <div className="text-2xl ml-4 md:ml-16 px-4 md:px-20  font-semibold">Why choose ixigo For Bus Ticket Booking</div>
         <div className="text-sm ml-4 md:ml-16 px-4 md:px-20 pt-2 ">
           <p>ixigo Bus Booking is powered by AbhiBus which is India’s fastest growing online ticket booking platform. AbhiBus is the official ticketing partner of several State Road Transport Corporation (SRTC) operators and over 3500+ private bus partners covering more than 100,000 bus routes</p>
-          <div className=" px-4 md:px-20 pb-8 w-full">
+          <div className="px-4 md:px-20 pb-8 w-full">
             <div className="relative">
               <div ref={carouselRef2} className="carousel flex transition-transform duration-500 ease-in-out overflow-hidden">
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 1" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 2" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 3" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 4" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 5" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 6" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 7" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 8" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 9" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                <div className="card flex-none mr-6">
+                <div className="card flex-none mr-6 w-72">
                   <Link to="">
                     <img src="/img/dis1.jpg" alt="Offer 10" className="w-full h-44 rounded-md shadow-md" />
                   </Link>
                 </div>
-                {/* Add more cards as needed */}
               </div>
               {showNavButtons2 && (
                 <div className="absolute inset-y-0 flex items-center justify-between w-full px-4">
