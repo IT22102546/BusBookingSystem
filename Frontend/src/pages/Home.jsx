@@ -1,158 +1,161 @@
 /* eslint-disable react/prop-types */
-import { Button,Select} from "flowbite-react";
-import { useEffect, useState, useRef  } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { Link,  useNavigate } from "react-router-dom";
-
-
-
+import { Button, Select } from "flowbite-react";
+import { useEffect, useState, useRef } from 'react';
+import { FaChevronDown, FaChevronUp, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { Link, useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const FAQItem = ({ question, intro, answer }) => {
-    const [isOpen, setIsOpen] = useState(false);
-  
-    return (
-      <div className="mb-4">
-        <div className="flex items-center mb-2">
-          <div className="border-l-2 border-gray-300 h-full mr-4"> </div>
-          <div className="flex justify-between items-center w-full px-4 py-2 rounded-lg cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
-            
-            <div className="font-semibold">{question}
-            
-            </div>
-           
-            <div>{isOpen ? <FaChevronUp /> : <FaChevronDown />}</div>
-          </div>
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="mb-4">
+      <div className="flex items-center mb-2">
+        <div className="border-l-2 border-gray-300 h-full mr-4"> </div>
+        <div className="flex justify-between items-center w-full px-4 py-2 rounded-lg cursor-pointer" onClick={() => setIsOpen(!isOpen)}>
+          <div className="font-semibold">{question}</div>
+          <div>{isOpen ? <FaChevronUp /> : <FaChevronDown />}</div>
         </div>
-        {isOpen && (
-          <div className="mt-2 px-4 py-2  rounded-lg ml-16 text-slate-500">
-            {intro && <div className="mb-2 ">{intro}</div>}
-            {Array.isArray(answer) ? (
-              <ul className="list-disc list-inside">
-                {answer.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-                
-              </ul>
-            ) : (
-              <div className="ml-16 text-slate-500">{answer}</div>
-            )}
-            <hr className="my-2 border-gray-300" />
-          </div>
-        )}
       </div>
-    );
-  };
-
- 
-
-  
-  
+      {isOpen && (
+        <div className="mt-2 px-4 py-2 rounded-lg ml-16 text-slate-500">
+          {intro && <div className="mb-2 ">{intro}</div>}
+          {Array.isArray(answer) ? (
+            <ul className="list-disc list-inside">
+              {answer.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          ) : (
+            <div className="ml-16 text-slate-500">{answer}</div>
+          )}
+          <hr className="my-2 border-gray-300" />
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default function Home() {
+  const [slideIndex1, setSlideIndex1] = useState(0);
+  const [slideIndex2, setSlideIndex2] = useState(0);
+  const [showNavButtons1, setShowNavButtons1] = useState(false);
+  const [showNavButtons2, setShowNavButtons2] = useState(false);
+  const [isFirstSlide1, setIsFirstSlide1] = useState(true);
+  const [isFirstSlide2, setIsFirstSlide2] = useState(true);
+  const [isLastSlide1, setIsLastSlide1] = useState(false);
+  const [isLastSlide2, setIsLastSlide2] = useState(false);
+  const carouselRef1 = useRef(null);
+  const carouselRef2 = useRef(null);
+  const navigate = useNavigate();
+  const [startStations, setStartStations] = useState([]);
+  const [toStations, setToStations] = useState([]);
 
-    const [slideIndex, setSlideIndex] = useState(0);
-    const [showNavButtons, setShowNavButtons] = useState(false);
-    const [isFirstSlide, setIsFirstSlide] = useState(true);
-    const [isLastSlide, setIsLastSlide] = useState(false);
-    const carouselRef = useRef(null);
-    const navigate = useNavigate(); 
-    const [startStations, setStartStations] = useState([]);
-    const [toStations, setToStations] = useState([]);
-  
-
-    useEffect(() => {
-        const fetchStations = async () => {
-          try {
-            const res = await fetch("/api/buses/stations");
-            if (!res.ok) {
-              throw new Error("Failed to fetch stations");
-            }
-            const data = await res.json();
-            setStartStations(data.startStations || []);
-            setToStations(data.toStations || []);
-          } catch (error) {
-            console.error("Error fetching stations:", error);
-          }
-        };
-    
-        fetchStations();
-      }, []);
-
-    const [sideBarData, setSideBarData] = useState({
-        startStation: "Gova",
-        toStation: "Hyderabad",
-       
-      });
-    
-    useEffect(() => {
-        const today = new Date().toISOString().split('T')[0];
-        setSideBarData((prevData) => ({
-          ...prevData,
-          date: today,
-        }));
-      }, []);
-    
-      const handleChange = (e) => {
-        const { id, value } = e.target;
-        setSideBarData((prevData) => ({
-          ...prevData,
-          [id]: value,
-        }));
-      };
-    
-      const handleSearch = (e) => {
-        e.preventDefault();
-        const { startStation, toStation } = sideBarData;
-        navigate(`/search?startStation=${startStation}&toStation=${toStation}`);
-    };
-
-    const moveCarousel = (n) => {
-        const carousel = carouselRef.current;
-        const cardWidth = carousel.children[0].offsetWidth + 6; // Adjusted width including margin
-        const numVisibleCards = Math.floor(carousel.clientWidth / cardWidth);
-
-        let newIndex = slideIndex + n;
-        newIndex = Math.min(Math.max(newIndex, 0), carousel.children.length - numVisibleCards);
-
-        setSlideIndex(newIndex);
-        setIsFirstSlide(newIndex === 0);
-        setIsLastSlide(newIndex >= carousel.children.length - numVisibleCards);
-
-        carousel.style.transform = `translateX(${-newIndex * cardWidth}px)`;
-    };
-
-    useEffect(() => {
-        const carousel = carouselRef.current;
-        const cardWidth = carousel.children[0].offsetWidth + 6; // Adjusted width including margin
-        const numVisibleCards = Math.floor(carousel.clientWidth / cardWidth);
-
-        if (carousel.children.length > numVisibleCards) {
-            setShowNavButtons(true);
-        } else {
-            setShowNavButtons(false);
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const res = await fetch("/api/buses/stations");
+        if (!res.ok) {
+          throw new Error("Failed to fetch stations");
         }
+        const data = await res.json();
+        setStartStations(data.startStations || []);
+        setToStations(data.toStations || []);
+      } catch (error) {
+        console.error("Error fetching stations:", error);
+      }
+    };
 
-        // Check initial slide positions
-        const slideIndex = Math.round(carousel.scrollLeft / cardWidth);
-        setSlideIndex(slideIndex);
-        setIsFirstSlide(slideIndex === 0);
-        setIsLastSlide(slideIndex >= carousel.children.length - numVisibleCards);
+    fetchStations();
+  }, []);
 
-        // Listen for scroll events to update slide positions dynamically
-        const handleScroll = () => {
-            const newIndex = Math.round(carousel.scrollLeft / cardWidth);
-            setSlideIndex(newIndex);
-            setIsFirstSlide(newIndex === 0);
-            setIsLastSlide(newIndex >= carousel.children.length - numVisibleCards);
-        };
+  const [sideBarData, setSideBarData] = useState({
+    startStation: "Gova",
+    toStation: "Hyderabad",
+  });
 
-        carousel.addEventListener('scroll', handleScroll);
+  useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+    setSideBarData((prevData) => ({
+      ...prevData,
+      date: today,
+    }));
+  }, []);
 
-        return () => {
-            carousel.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setSideBarData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const { startStation, toStation } = sideBarData;
+    navigate(`/search?startStation=${startStation}&toStation=${toStation}`);
+  };
+
+  const moveCarousel = (n, ref, setSlideIndex, setIsFirstSlide, setIsLastSlide) => {
+    const carousel = ref.current;
+    const cardWidth = carousel.children[0].offsetWidth + parseInt(getComputedStyle(carousel.children[0]).marginRight, 10);
+    const numVisibleCards = Math.floor(carousel.clientWidth / cardWidth);
+
+    let newIndex = (ref === carouselRef1 ? slideIndex1 : slideIndex2) + n;
+    newIndex = Math.min(Math.max(newIndex, 0), carousel.children.length - numVisibleCards);
+
+    setSlideIndex(newIndex);
+    setIsFirstSlide(newIndex === 0);
+    setIsLastSlide(newIndex >= carousel.children.length - numVisibleCards);
+
+    carousel.scrollTo({
+      left: newIndex * cardWidth,
+      behavior: 'smooth'
+    });
+  };
+
+  const handleScroll = (ref, setSlideIndex, setIsFirstSlide, setIsLastSlide) => {
+    const carousel = ref.current;
+    const cardWidth = carousel.children[0].offsetWidth + parseInt(getComputedStyle(carousel.children[0]).marginRight, 10);
+    const numVisibleCards = Math.floor(carousel.clientWidth / cardWidth);
+
+    const newIndex = Math.round(carousel.scrollLeft / cardWidth);
+    setSlideIndex(newIndex);
+    setIsFirstSlide(newIndex === 0);
+    setIsLastSlide(newIndex >= carousel.children.length - numVisibleCards);
+  };
+
+  useEffect(() => {
+    const initializeCarousel = (ref, setShowNavButtons, setSlideIndex, setIsFirstSlide, setIsLastSlide) => {
+      const carousel = ref.current;
+      const cardWidth = carousel.children[0].offsetWidth + parseInt(getComputedStyle(carousel.children[0]).marginRight, 10);
+      const numVisibleCards = Math.floor(carousel.clientWidth / cardWidth);
+
+      if (carousel.children.length > numVisibleCards) {
+        setShowNavButtons(true);
+      } else {
+        setShowNavButtons(false);
+      }
+
+      // Check initial slide positions
+      const slideIndex = Math.round(carousel.scrollLeft / cardWidth);
+      setSlideIndex(slideIndex);
+      setIsFirstSlide(slideIndex === 0);
+      setIsLastSlide(slideIndex >= carousel.children.length - numVisibleCards);
+
+      // Listen for scroll events to update slide positions dynamically
+      const handleScrollEvent = () => handleScroll(ref, setSlideIndex, setIsFirstSlide, setIsLastSlide);
+
+      carousel.addEventListener('scroll', handleScrollEvent);
+
+      return () => {
+        carousel.removeEventListener('scroll', handleScrollEvent);
+      };
+    };
+
+    initializeCarousel(carouselRef1, setShowNavButtons1, setSlideIndex1, setIsFirstSlide1, setIsLastSlide1);
+    initializeCarousel(carouselRef2, setShowNavButtons2, setSlideIndex2, setIsFirstSlide2, setIsLastSlide2);
+  }, []);
     return (
         <div className="flex flex-col w-full">
         
@@ -215,98 +218,169 @@ export default function Home() {
             </div>
             
             <div className="flex-1 flex flex-col items-left justify-left">
-                <div className="text-2xl ml-4 md:ml-16 px-4 md:px-20 py-8 font-semibold">Bus Booking Discount Offers</div>
-                <div className="ml-10 px-4 md:px-20 pb-8 w-full">
-                    <div className="relative overflow-hidden">
-                        <div ref={carouselRef} className="carousel flex transition-transform duration-500 ease-in-out overflow-hidden">
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis1.jpg" alt="Offer 1" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis1.jpg" alt="Offer 2" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis1.jpg" alt="Offer 3" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis1.jpg" alt="Offer 4" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis1.jpg" alt="Offer 5" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis1.jpg" alt="Offer 6" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis1.jpg" alt="Offer 7" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis1.jpg" alt="Offer 8" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis1.jpg" alt="Offer 9" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            <div className="card flex-none mr-6">
-                                <Link to="">
-                                    <img src="/img/dis11.jpg" alt="Offer 10" className="w-full h-44 rounded-md shadow-md" />
-                                </Link>
-                            </div>
-                            {/* Add more cards as needed */}
-                        </div>
-                        {/* Conditionally render navigation buttons */}
-                        {showNavButtons && (
-                            <>
-                                {!isFirstSlide && (
-                                    <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
-                                        <button
-                                            className="bg-white bg-opacity-25 text-orange-500 text-xl flex items-center justify-center px-2 py-4 focus:outline-none"
-                                            onClick={() => moveCarousel(-1)}
-                                        >
-                                            ❮
-                                        </button>
-                                    </div>
-                                )}
-                                {!isLastSlide && (
-                                    <div className="absolute right-0 top-1/2 transform -translate-y-1/2">
-                                        <button
-                                            className="bg-white bg-opacity-25 text-orange-500 text-xl flex items-center justify-center px-2 py-4 focus:outline-none"
-                                            onClick={() => moveCarousel(1)}
-                                        >
-                                            ❯
-                                        </button>
-                                    </div>
-                                )}
-                            </>
-                        )}
-                    </div>
-                </div>
+        <div className="text-2xl ml-4 md:ml-16 px-4 md:px-20 py-8 font-semibold">Bus Booking Discount Offers</div>
+        <div className=" px-4 md:px-20 pb-8 w-full">
+          <div className="relative">
+            <div ref={carouselRef1} className="carousel flex transition-transform duration-500 ease-in-out overflow-hidden">
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 1" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 2" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 3" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 4" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 5" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 6" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 7" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 8" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 9" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              <div className="card flex-none mr-6">
+                <Link to="">
+                  <img src="/img/dis1.jpg" alt="Offer 10" className="w-full h-44 rounded-md shadow-md" />
+                </Link>
+              </div>
+              {/* Add more cards as needed */}
             </div>
-            
-            <div className="flex-1 flex flex-col items-left justify-left pb-5">
-                <div className="text-2xl ml-4 md:ml-16 px-4 md:px-20  font-semibold">Why choose ixigo For Bus Ticket Booking</div>
-                <div className="text-sm ml-4 md:ml-16 px-4 md:px-20 pt-2 ">
-                  <p>ixigo Bus Booking is powered by AbhiBus which is India’s fastest growing online ticket booking platform. AbhiBus is the official ticketing partner of several State Road Transport Corporation (SRTC) operators and over 3500+ private bus partners covering more than 100,000 bus routes</p>
+            {showNavButtons1 && (
+              <div className="absolute inset-y-0 flex items-center justify-between w-full px-4">
+                {!isFirstSlide1 && (
+                  <button
+                    className="bg-white p-2 rounded-full shadow-md"
+                    onClick={() => moveCarousel(-1, carouselRef1, setSlideIndex1, setIsFirstSlide1, setIsLastSlide1)}
+                  >
+                    <FaArrowLeft />
+                  </button>
+                )}
+                {!isLastSlide1 && (
+                  <button
+                    className="bg-white p-2 rounded-full shadow-md"
+                    onClick={() => moveCarousel(1, carouselRef1, setSlideIndex1, setIsFirstSlide1, setIsLastSlide1)}
+                  >
+                    <FaArrowRight />
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="flex-1 flex flex-col items-left justify-left pb-5">
+        <div className="text-2xl ml-4 md:ml-16 px-4 md:px-20  font-semibold">Why choose ixigo For Bus Ticket Booking</div>
+        <div className="text-sm ml-4 md:ml-16 px-4 md:px-20 pt-2 ">
+          <p>ixigo Bus Booking is powered by AbhiBus which is India’s fastest growing online ticket booking platform. AbhiBus is the official ticketing partner of several State Road Transport Corporation (SRTC) operators and over 3500+ private bus partners covering more than 100,000 bus routes</p>
+          <div className=" px-4 md:px-20 pb-8 w-full">
+            <div className="relative">
+              <div ref={carouselRef2} className="carousel flex transition-transform duration-500 ease-in-out overflow-hidden">
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 1" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
                 </div>
-                
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 2" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
+                </div>
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 3" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
+                </div>
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 4" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
+                </div>
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 5" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
+                </div>
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 6" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
+                </div>
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 7" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
+                </div>
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 8" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
+                </div>
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 9" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
+                </div>
+                <div className="card flex-none mr-6">
+                  <Link to="">
+                    <img src="/img/dis1.jpg" alt="Offer 10" className="w-full h-44 rounded-md shadow-md" />
+                  </Link>
+                </div>
+                {/* Add more cards as needed */}
+              </div>
+              {showNavButtons2 && (
+                <div className="absolute inset-y-0 flex items-center justify-between w-full px-4">
+                  {!isFirstSlide2 && (
+                    <button
+                      className="bg-white p-2 rounded-full shadow-md"
+                      onClick={() => moveCarousel(-1, carouselRef2, setSlideIndex2, setIsFirstSlide2, setIsLastSlide2)}
+                    >
+                      <FaArrowLeft />
+                    </button>
+                  )}
+                  {!isLastSlide2 && (
+                    <button
+                      className="bg-white p-2 rounded-full shadow-md"
+                      onClick={() => moveCarousel(1, carouselRef2, setSlideIndex2, setIsFirstSlide2, setIsLastSlide2)}
+                    >
+                      <FaArrowRight />
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
+          </div>
+        </div>
+      </div>
 
             <div className="flex-1 flex flex-col items-left justify-left bg-slate-200">
                 <div className="text-2xl ml-4 md:ml-16 px-4 md:px-20 py-8 font-semibold pt-3">SRTC (State Road Transport Corporation) Bus Tickets Booking</div>
