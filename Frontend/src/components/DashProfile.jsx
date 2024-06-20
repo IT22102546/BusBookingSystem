@@ -230,7 +230,7 @@ return (
               </button>
           </div>
 
-          <Button type='submit' className='bg-orange-500' disabled={loading}>
+          <Button type='submit' className='bg-green-500' disabled={loading}>
               {loading ? 'Loading..' : 'Update Account'}
           </Button>
       </form>

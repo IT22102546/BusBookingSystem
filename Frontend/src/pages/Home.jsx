@@ -164,64 +164,76 @@ export default function Home() {
     return (
         <div className="flex flex-col w-full">
         
-          <div className="min-h-screen w-full flex flex-col" style={{
-                backgroundImage: `url('/img/bgg.jpg')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                width: '100%',
-                minHeight: '70vh'}}>
+        <div className="min-h-screen w-full flex flex-col" style={{
+    position: 'relative',
+    width: '100%',
+    minHeight: '70vh'
+}}>
 
-                <div className="text-4xl text-center mt-6">
-                    Book Bus Tickets
-                </div>
-                <div className="flex items-center justify-center mt-6 w-full px-4 md:px-0">
-                <form className="flex flex-col md:flex-row bg-white h-auto md:h-28 w-full max-w-5xl rounded-md items-center p-4 shadow-md" onSubmit={handleSearch}>
-                    <div className="flex-1 p-2 w-full">
-                     <Select
-                        className="w-full md:w-60"
-                        id="startStation"
-                        value={sideBarData.startStation}
-                        onChange={handleChange}
-                        >
-                        {startStations.map((station, index) => (
-                            <option key={index} value={station}>
+    <video autoPlay muted loop style={{
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        zIndex: '-1'
+    }}>
+        <source src="/video/bgV.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+
+    <div className="text-2xl text-left mt-6 ml-4 md:ml-16 px-4 md:px-20 text-black font-bold" style={{ position: 'relative', zIndex: '1' }}>
+        Search For Bus Tickets
+    </div>
+    <div className="flex items-center justify-center mt-6 w-full px-4 md:px-0" style={{ position: 'relative', zIndex: '1' }}>
+        <form className="flex flex-col md:flex-row bg-white h-auto md:h-28 w-full max-w-5xl rounded-md items-center p-4 shadow-md" onSubmit={handleSearch}>
+            <div className="flex-1 p-2 w-full">
+                <Select
+                    className="w-full md:w-60"
+                    id="startStation"
+                    value={sideBarData.startStation}
+                    onChange={handleChange}
+                >
+                    {startStations.map((station, index) => (
+                        <option key={index} value={station}>
                             {station}
-                            </option>
-                        ))}
-                        </Select>
-                    </div>
-                    <div className="flex-1 p-2 w-full">
-                    <Select
-                        className="w-full md:w-60"
-                        id="toStation"
-                        value={sideBarData.toStation}
-                        onChange={handleChange}
-                        >
-                        {toStations.map((station, index) => (
-                            <option key={index} value={station}>
-                            {station}
-                            </option>
-                        ))}
-                    </Select>
-                    </div>
-                    <div className="flex-1 p-2 w-full">
-                    <input
-                        type="date"
-                        id="date"
-                        className="rounded-md w-full"
-                        value={sideBarData.date}
-                        onChange={handleChange}
-                    />
-                    </div>
-                    <div className="p-2 w-full md:w-auto">
-                    <Button type="submit" className="bg-orange-500 w-full">
-                        Search
-                    </Button>
-                    </div>
-          </form>
-                </div>
+                        </option>
+                    ))}
+                </Select>
             </div>
+            <div className="flex-1 p-2 w-full">
+                <Select
+                    className="w-full md:w-60"
+                    id="toStation"
+                    value={sideBarData.toStation}
+                    onChange={handleChange}
+                >
+                    {toStations.map((station, index) => (
+                        <option key={index} value={station}>
+                            {station}
+                        </option>
+                    ))}
+                </Select>
+            </div>
+            <div className="flex-1 p-2 w-full">
+                <input
+                    type="date"
+                    id="date"
+                    className="rounded-md w-full"
+                    value={sideBarData.date}
+                    onChange={handleChange}
+                />
+            </div>
+            <div className="p-2 w-full md:w-auto">
+                <Button type="submit" className="bg-green-500 w-full">
+                    Search
+                </Button>
+            </div>
+        </form>
+    </div>
+</div>
+
             
             <div className="flex-1 flex flex-col items-left justify-left pb-5">
         <div className="text-2xl ml-4 md:ml-16 px-4 md:px-20 py-8 font-semibold">Bus Booking Discount Offers</div>
@@ -765,7 +777,7 @@ export default function Home() {
 
 
 
-            <div className="flex flex-col md:flex-row md:gap-2 md:order-2 w-full md:w-auto bg-orange-900 rounded-md">
+            <div className="flex flex-col md:flex-row md:gap-2 md:order-2 w-full md:w-auto bg-green-500 rounded-md">
                 <div className="py-4 flex-1 md:text-left text-center">
                     <Link to="#" className="text-white text-sm ml-2 md:ml-4">
                         AbhiBus | ixigo | ConfirmTkt

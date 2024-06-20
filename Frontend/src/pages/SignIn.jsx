@@ -55,7 +55,7 @@ export default function SignIn() {
 
     return (
         <div className="min-h-screen flex items-center justify-center" style={{
-            backgroundImage: `url('https://www.shutterstock.com/image-photo/view-railway-track-suburban-electric-600nw-2242917721.jpg')`,
+            backgroundImage: `url('/img/signfromBG.jpg')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -63,14 +63,14 @@ export default function SignIn() {
             <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-20">
                 {/* left */}
                 <div className="flex-1 w-full screen mt-35 relative" style={{
-                    backgroundImage: `url('https://www.shutterstock.com/image-illustration/passenger-transportation-japan-by-buses-600nw-1536727859.jpg')`,
+                    backgroundImage: `url('/img/signfromBG.jpg')`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }}>
                     <div className="p-5 border border-gray-300 rounded-lg shadow-lg animate-fadeIn bg-white bg-opacity-75 w-50">
                         <h2 className="text-xl font-bold mb-4 animate-slideIn font-cinzel">About Us</h2>
                         <p className="mb-4 animate-slideIn">Learn more about our mission and values.</p>
-                        <Button className="bg-orange-500 font-cinzel">
+                        <Button className="bg-green-500 font-cinzel">
                             <Link to="#">About Us</Link>
                         </Button>
                     </div>
@@ -102,7 +102,7 @@ export default function SignIn() {
                                 </button>
                             </div>
                         </div>
-                        <Button disabled={loading} className="bg-orange-500 font-cinzel" type="submit">
+                        <Button disabled={loading} className="bg-green-500 font-cinzel" type="submit">
                             {loading ? (
                                 <>
                                     <Spinner size='sm' />

@@ -34,7 +34,7 @@ export default function Header() {
             <div className="flex flex-col md:flex-row md:gap-2 md:order-2 w-full md:w-auto">
                 <div className="flex flex-wrap justify-center md:justify-start w-full md:w-auto">
                     <Link to="/" className="self-center whitespace-nowrap text-3xl font-semibold font-tangerine ml-0 md:ml-16">
-                        <span className="px-2 py-1 bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500 text-white rounded-lg">ixigo</span>
+                        <img src="/img/logo2.jpg" alt="Logo" style={{ width: '100px', height: '50px' }} className='mr-2'/>
                     </Link>
                 </div>
                 <div className="flex flex-wrap justify-center md:justify-start w-full md:w-auto">
@@ -95,7 +95,7 @@ export default function Header() {
                     <div className="bg-white p-6 rounded-lg text-center">
                         <h2 className="text-2xl font-bold mb-4">Coming Soon!</h2>
                         <p className="text-gray-600">Please Stay Calm We Will Arrive Soon</p>
-                        <button className="mt-4 bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600" onClick={closeModal}>Close</button>
+                        <button className="mt-4 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-500" onClick={closeModal}>Close</button>
                     </div>
                 </div>
             )}

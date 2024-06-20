@@ -59,21 +59,21 @@ export default function SignUp() {
 
     return (
         <div className="min-h-screen flex items-center justify-center" style={{
-            backgroundImage: `url('https://www.shutterstock.com/image-photo/view-railway-track-suburban-electric-600nw-2242917721.jpg')`,
+            backgroundImage: `url('/img/signfromBG.jpg')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
         }}>
             <div className="flex p-3 max-w-4xl mx-auto flex-col md:flex-row md:items-center gap-20">
                 <div className="flex-1 w-full screen mt-35 relative" style={{
-                    backgroundImage: `url('https://www.shutterstock.com/image-illustration/passenger-transportation-japan-by-buses-600nw-1536727859.jpg')`,
+                    backgroundImage: `url('/img/signfromBG.jpg')`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }}>
                     <div className="p-5 border border-gray-300 rounded-lg shadow-lg animate-fadeIn bg-white bg-opacity-75 w-50">
                         <h2 className="text-xl font-bold mb-4 animate-slideIn font-cinzel">About Us</h2>
                         <p className="mb-4 animate-slideIn">Learn more about our mission and values.</p>
-                        <Button className="bg-orange-500">
+                        <Button className="bg-green-500">
                             <Link to="#" className="font-cinzel">About Us</Link>
                         </Button>
                     </div>
@@ -142,7 +142,7 @@ export default function SignUp() {
                             </div>
                         </div>
 
-                        <Button disabled={loading} className="bg-orange-500 font-cinzel" type="submit">
+                        <Button disabled={loading} className="bg-green-500 font-cinzel" type="submit">
                             {loading ? (
                                 <>
                                     <Spinner size='sm' />

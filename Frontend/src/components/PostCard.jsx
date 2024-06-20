@@ -35,7 +35,7 @@ export default function PostCard({ bus = {} }) {
             <span className="font-semibold text-md text-yellow-400">{type} - {company}</span>
           </div>
           <div className="flex items-center gap-1 mt-2 sm:mt-0">
-            <span className="text-blue-700 font-semibold text-lg">Rs.{price}</span>
+            <span className="text-green-700 font-semibold text-lg">Rs.{price}</span>
           </div>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
@@ -57,7 +57,7 @@ export default function PostCard({ bus = {} }) {
         </div>
       </div>
       <div className="flex justify-end items-center mt-4">
-        <button className="bg-blue-700 text-white px-4 py-2 rounded">Book Now</button>
+        <button className="bg-green-700 text-white px-4 py-2 rounded">Book Now</button>
       </div>
     </div>
   );

@@ -218,7 +218,7 @@ export default function SearchBus() {
 
   return (
     <div className="flex flex-col">
-      <div className="p-4 border-b border-gray-500 flex flex-col md:flex-row justify-center items-center text-center bg-blue-500">
+      <div className="p-4 border-b border-gray-500 flex flex-col md:flex-row justify-center items-center text-center bg-green-300">
         <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 md:gap-8 w-full max-w-4xl">
           <div className="flex flex-col md:flex-row items-center gap-2 w-full">
             <label className="whitespace-nowrap font-cinzel font-semibold">From:</label>
@@ -261,7 +261,7 @@ export default function SearchBus() {
             />
           </div>
           <div className="p-2 w-full md:w-auto">
-            <Button type="submit" className="bg-orange-500 w-full">
+            <Button type="submit" className="bg-green-500 w-full">
               Search
             </Button>
           </div>
@@ -301,7 +301,7 @@ export default function SearchBus() {
       </button>
     </div>
   </div>
-  <div className="flex items-center text-orange-400">
+  <div className="flex items-center text-green-600">
     <img src="/img/bus.png" className="w-5 h-6 mr-2" alt="Bus icon" />
     <span className="text-lg font-semibold"> Showing {buses.length} Buses on this Route </span>
   </div>
