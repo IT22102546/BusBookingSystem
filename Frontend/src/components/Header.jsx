@@ -82,7 +82,7 @@ export default function Header() {
                         <DropdownItem onClick={handleSignOut}>Sign Out</DropdownItem>
                     </Dropdown>
                 ) : (
-                    <Link to='/signin' className="text-orange-500 flex items-center mt-4 md:mt-0">
+                    <Link to='/signin' className="text-green-500 flex items-center mt-4 md:mt-0">
                         <HiUser className="mr-1" style={{ fontSize: '24px' }} />
                         Login/SignUp
                     </Link>

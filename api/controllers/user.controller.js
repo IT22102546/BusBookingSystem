@@ -6,6 +6,13 @@ import { errorHandler } from "../utils/error.js";
 export const updateUser = async (req,res,next) => {
    
     try {
+
+      if(req.user._id !== req.params._id) {
+        console.log("req.user.id:", req.user.id, "Type:", typeof req.user.id);
+        console.log("req.params.id:", req.params.id, "Type:", typeof req.params.id);
+        return next (errorHandler(401,'You can update only your Account'))
+    }
+
       if (req.body.password) {
        
         const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{5,}$/;
@@ -55,7 +62,7 @@ export const updateUser = async (req,res,next) => {
 }
 
 export const deleteUser = async(req,res,next)=>{
-    if (!req.user.isAdmin && req.user.id !== req.params.id) {
+    if (req.user._id !== req.params._id) {
       return next(errorHandler(403, 'You are not allowed to delete this user'));
     }
   

@@ -1,18 +1,18 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
-import SignIn from "./pages/SignIn";
-import Header from "./components/Header";
-import Search from "./pages/Search";
-import DashBoard from "./pages/DashBoard";
-import PrivateRoute from "./components/PrivateRoute";
-import DashBus from "./components/DashBus";
-import AddBus from "./pages/AddBus";
-
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import Home from './pages/Home';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+import Header from './components/Header';
+import Search from './pages/Search';
+import DashBoard from './pages/DashBoard';
+import PrivateRoute from './components/PrivateRoute';
+import DashBus from './components/DashBus';
+import BusAdd from './pages/BusAdd';
+import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute';
 
 function App() {
   const location = useLocation();
-  const hideHeaderPaths = ["/signin", "/signup"];
+  const hideHeaderPaths = ['/signin', '/signup'];
 
   return (
     <div>
@@ -22,21 +22,18 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/dashboard" element={
-          <PrivateRoute>
-            <DashBoard />
-          </PrivateRoute>
-        }/>
-        <Route path="/dashbus" element={
-          <PrivateRoute>
-            <DashBus/>
-          </PrivateRoute>
-        }/>
-        <Route patOnlyAdminPrivateRouteh="/addbus" element={
-          <PrivateRoute>
-            <AddBus/>
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <DashBoard />
             </PrivateRoute>
-        }/>
+          }
+        />
+        <Route element={<OnlyAdminPrivateRoute />}>
+          <Route path="/addbus" element={<BusAdd />} />
+          <Route path="/dashbus" element={<DashBus />} />
+        </Route>
       </Routes>
     </div>
   );

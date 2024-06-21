@@ -345,18 +345,20 @@ export default function SearchBus() {
               <div className="flex gap-2">
                
                 
+                
+                <button
+                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.type === "Normal" ? "bg-blue-200" : ""}`}
+                  onClick={() => applyBusTypeFilter("Normal")}
+                >
+                  Normal
+                </button>
                 <button
                   className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.type === "Ac" ? "bg-blue-200" : ""}`}
                   onClick={() => applyBusTypeFilter("Ac")}
                 >
                   AC
                 </button>
-                <button
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.type === "NonAc" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyBusTypeFilter("NonAc")}
-                >
-                  Non AC
-                </button>
+                
               </div>
             </div>
             <div className="bg-gray-300 rounded-md mb-2 p-3">

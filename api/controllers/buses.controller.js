@@ -32,10 +32,6 @@ export const create = async (req, res, next) => {
       return next(errorHandler(400, 'Seat layout should be in 3x2 or 2x2 format'));
     }
 
-    const timeFormat = /^([01]\d|2[0-3]):([0-5]\d)$/;
-    if (!timeFormat.test(arrivalTime) || !timeFormat.test(departureTime)) {
-      return next(errorHandler(400, 'Departure time and arrival time should be in 00:00 format'));
-    }
 
     const slug = busNumber.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
     const newBus = new Bus({

@@ -3,7 +3,6 @@ import { errorHandler } from "./error.js";
 
 
 
-
 export const verifyToken = (req,res,next) => {
     const token = req.cookies.acess_token;
     
