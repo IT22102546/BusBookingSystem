@@ -6,7 +6,7 @@ import { app } from "../firebase";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import { deleteUserFailure, deleteUserStart, deleteUserSuccess, signOut, updateUserFailure, updateUserStart, updateUserSuccess } from "../redux/user/userSlice";
 import  { HiOutlineExclamationCircle } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function DashProfile() {
   const dispatch = useDispatch();
@@ -233,6 +233,17 @@ return (
           <Button type='submit' className='bg-green-500' disabled={loading}>
               {loading ? 'Loading..' : 'Update Account'}
           </Button>
+          {currentUser.isAdmin && (
+          <Link to='/addbus'>
+            <Button
+              type='button'
+              className='bg-green-500 w-full'
+              outline
+            >
+              Add Buses
+            </Button>
+          </Link>
+        )}   
       </form>
 
       <div className='text-red-500 flex justify-between mt-5'>

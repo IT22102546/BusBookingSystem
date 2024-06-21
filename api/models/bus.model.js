@@ -43,9 +43,21 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true, 
     },
+
+    arrivalTime: {
+      type: String,
+      required: true, 
+    },
+
     travelTime:{
       type: String,
       required: true,
+  },
+
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
   },
 
   seatLayout:{
@@ -61,6 +73,14 @@ const productSchema = new mongoose.Schema(
     availability:{
       type:String
   },
+  busNumber:{
+
+    type:String,
+    required:true,
+    unique:true
+
+},
+
    
 
    

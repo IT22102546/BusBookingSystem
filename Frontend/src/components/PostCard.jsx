@@ -14,14 +14,15 @@ export default function PostCard({ bus = {} }) {
     seat = 0,
     seatLayout = 'N/A',
     rating = 0,
-    availability='N/A'
+    availability='N/A',
+    busNumber='N/A'
   } = bus;
 
   return (
     <div className="group relative border border-gray-300 h-auto overflow-hidden rounded-lg transition-all w-full md:w-4/5 p-6 flex flex-col justify-between bg-white shadow-lg">
       <div className="flex flex-col gap-2">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-          <span className="text-lg font-bold">{type} - {company} - {startStation} - {toStation}</span>
+          <span className="text-lg font-bold">{type} - {company} - {busNumber} - {startStation} - {toStation}</span>
         </div>
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
           <div className="flex items-center gap-1">

@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Search from "./pages/Search";
 import DashBoard from "./pages/DashBoard";
 import PrivateRoute from "./components/PrivateRoute";
+import DashBus from "./components/DashBus";
+import AddBus from "./pages/AddBus";
 
 function App() {
   const location = useLocation();
@@ -24,7 +26,22 @@ function App() {
             <DashBoard />
           </PrivateRoute>
         }/>
+
+        
+        <Route path="/dashbus" element={
+          <PrivateRoute>
+            <DashBus/>
+          </PrivateRoute>
+        }/>
+
+        <Route path="/addbus" element={
+          <PrivateRoute>
+            <AddBus/>
+          </PrivateRoute>
+        }/>
+
       </Routes>
+      
     </div>
   );
 }

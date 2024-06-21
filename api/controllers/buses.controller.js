@@ -1,4 +1,24 @@
 import Bus from "../models/bus.model.js";
+import { errorHandler } from "../utils/error.js";
+
+export const create = async (req, res, next) => {
+  try {
+   
+    
+
+    const slug = req.body.busNumber.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
+    const newBus = new Bus({
+      ...req.body,
+      slug,
+      userId: req.user.id,
+    });
+
+    const savedBus = await newBus.save();
+    res.status(201).json(savedBus);
+  } catch (error) {
+    next(error);
+  }
+}
 
 export const getBuses = async (req, res, next) => {
   try {
@@ -59,3 +79,16 @@ export const getStations = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deletebus = async (req, res, next) => {
+  try {
+    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+      return next(errorHandler(403, 'You are not allowed to delete this post'));
+    }
+    await Bus.findByIdAndDelete(req.params.busId);
+    res.status(200).json('The product has been deleted');
+  } catch (error) {
+    next(error);
+  }
+};
+

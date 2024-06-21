@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
 
     },
 
+    
+
     lastname:{
 
         type:String,
@@ -52,10 +54,12 @@ const userSchema = new mongoose.Schema({
     confirmpassword:{
 
         type:String,
-   
-      
+   },
 
-    },
+     isAdmin:{
+        type:Boolean,
+        default:false
+   },
 
     
     profilePicture:{
