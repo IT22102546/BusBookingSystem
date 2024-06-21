@@ -19,8 +19,8 @@ export default function PostCard({ bus = {} }) {
   } = bus;
 
   return (
-    <div className="group relative border border-gray-300 h-auto overflow-hidden rounded-lg transition-all w-full md:w-4/5 p-6 flex flex-col justify-between bg-white shadow-lg">
-      <div className="flex flex-col gap-2">
+    <div className="group relative border border-gray-300 h-64 overflow-hidden rounded-lg transition-all w-full md:w-4/5 p-6 flex flex-col justify-between bg-white shadow-lg">
+      <div className="flex flex-col gap-0">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
           <span className="text-lg font-bold">{type} - {company} - {busNumber} - {startStation} - {toStation}</span>
         </div>
@@ -57,7 +57,11 @@ export default function PostCard({ bus = {} }) {
           <span className="font-semibold text-sm text-slate-500">{toStation}</span>
         </div>
       </div>
-      <div className="flex justify-end items-center mt-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
+      <div className="flex items-center gap-1">
+            <span className="font-semibold text-slate-500 text-sm">Available Seat:</span>
+            <span className="text-slate-500 text-sm">{seat}</span>
+          </div>
         <button className="bg-green-700 text-white px-4 py-2 rounded">Book Now</button>
       </div>
     </div>

@@ -37,11 +37,10 @@ const userSchema = new mongoose.Schema({
 
     },
 
-    mobile:{
-        type:String,
-        unique:true
-
-    },
+    mobile: {
+        type: String,
+        unique: true,
+      },
 
     password:{
 

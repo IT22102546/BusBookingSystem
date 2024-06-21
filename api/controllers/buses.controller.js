@@ -3,10 +3,41 @@ import { errorHandler } from "../utils/error.js";
 
 export const create = async (req, res, next) => {
   try {
-   
+    const {
+      company,
+      busNumber,
+      price,
+      type,
+      arrivalTime,
+      departureTime,
+      seat,
+      seatLayout,
+      travelTime,
+      availability
+    } = req.body;
     
+    if (!req.user.isAdmin) {
+      return next(errorHandler(403, 'You are not allowed to add Bus'));
+    }
+   
+    if (!company || !busNumber || !price || !type || !arrivalTime || !departureTime || !seat || !seatLayout || !travelTime || !availability) {
+      return next(errorHandler(400, 'Please provide all required fields'));
+    }
 
-    const slug = req.body.busNumber.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
+    if (/\s/.test(company) || /\s/.test(busNumber)) {
+      return next(errorHandler(400, 'Company and bus number should not contain spaces'));
+    }
+
+    if (!/^(3x2|2x2)$/.test(seatLayout)) {
+      return next(errorHandler(400, 'Seat layout should be in 3x2 or 2x2 format'));
+    }
+
+    const timeFormat = /^([01]\d|2[0-3]):([0-5]\d)$/;
+    if (!timeFormat.test(arrivalTime) || !timeFormat.test(departureTime)) {
+      return next(errorHandler(400, 'Departure time and arrival time should be in 00:00 format'));
+    }
+
+    const slug = busNumber.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
     const newBus = new Bus({
       ...req.body,
       slug,
@@ -18,7 +49,7 @@ export const create = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 export const getBuses = async (req, res, next) => {
   try {
@@ -69,7 +100,6 @@ export const getBuses = async (req, res, next) => {
   }
 };
 
-
 export const getStations = async (req, res, next) => {
   try {
     const startStations = await Bus.distinct("startStation");
@@ -80,13 +110,13 @@ export const getStations = async (req, res, next) => {
   }
 };
 
-export const deletebus = async (req, res, next) => {
+export const deleteBus = async (req, res, next) => {
   try {
-    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+    if (!req.user.isAdmin) {
       return next(errorHandler(403, 'You are not allowed to delete this post'));
     }
     await Bus.findByIdAndDelete(req.params.busId);
-    res.status(200).json('The product has been deleted');
+    res.status(200).json('The bus has been deleted');
   } catch (error) {
     next(error);
   }

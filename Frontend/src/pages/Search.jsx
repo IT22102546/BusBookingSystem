@@ -210,6 +210,8 @@ export default function SearchBus() {
         return sortOrder === "asc" ? a.rating - b.rating : b.rating - a.rating;
       } else if (sortBy === "price") {
         return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+      } else if (sortBy === "seat") {
+        return sortOrder === "asc" ? a.seat - b.seat : b.seat - a.seat;
       }
       return 0; 
     });
@@ -299,6 +301,16 @@ export default function SearchBus() {
           <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
         )}
       </button>
+      <button
+        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "seat" ? "bg-blue-200" : ""}`}
+        onClick={() => handleSortChange("seat")}
+      >
+        Available Seats
+        {sortBy === "seat" && (
+          <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
+        )}
+      </button>
+
     </div>
   </div>
   <div className="flex items-center text-green-600">
@@ -331,23 +343,19 @@ export default function SearchBus() {
             <div className="bg-gray-300 rounded-md mb-2 p-3">
               <h3 className="font-semibold mb-2">Bus Type</h3>
               <div className="flex gap-2">
-                <button 
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.type === "SuperLuxury" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyBusTypeFilter("SuperLuxury")}
-                >
-                  Super Luxury
-                </button>
-                <button
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.type === "SemiLuxury" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyBusTypeFilter("SemiLuxury")}
-                >
-                  Semi Luxury
-                </button>
+               
+                
                 <button
                   className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.type === "Ac" ? "bg-blue-200" : ""}`}
                   onClick={() => applyBusTypeFilter("Ac")}
                 >
                   AC
+                </button>
+                <button
+                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.type === "NonAc" ? "bg-blue-200" : ""}`}
+                  onClick={() => applyBusTypeFilter("NonAc")}
+                >
+                  Non AC
                 </button>
               </div>
             </div>
@@ -376,12 +384,30 @@ export default function SearchBus() {
             </div>
             <div className="bg-gray-300 rounded-md mb-2 p-3">
               <h3 className="font-semibold mb-2">Bus Company</h3>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <button 
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "Bharathi_Travels" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyCompanyFilter("Bharathi_Travels")}
+                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "NCG_Travels" ? "bg-blue-200" : ""}`}
+                  onClick={() => applyCompanyFilter("NCG_Travels")}
                 >
-                  Bharathi Travels
+                  NCG Travels
+                </button>
+                <button 
+                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "DSG" ? "bg-blue-200" : ""}`}
+                  onClick={() => applyCompanyFilter("DSG")}
+                >
+                  DSG Travels
+                </button>
+                <button 
+                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "Chamara" ? "bg-blue-200" : ""}`}
+                  onClick={() => applyCompanyFilter("Chamara")}
+                >
+                  Chamara Travels
+                </button>
+                <button 
+                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "Aradhana" ? "bg-blue-200" : ""}`}
+                  onClick={() => applyCompanyFilter("Aradhana")}
+                >
+                  Aradhana Travels
                 </button>
                 <button
                   className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "VKV_Travels" ? "bg-blue-200" : ""}`}
@@ -393,9 +419,9 @@ export default function SearchBus() {
             </div>
           </div>
         </div>
-        <div className="w-full md:w-4/5">
+        <div className="w-full md:w-4/5 items-center justify-center">
           <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3">Results</h1>
-          <div className="p-7 flex flex-wrap gap-4">
+          <div className="p-7 flex flex-wrap gap-4  justify-center">
             {loading ? (
               <p className="text-xl text-gray-500">Loading...</p>
             ) : buses.length === 0 ? (

@@ -56,6 +56,18 @@ export default function DashSideBar() {
               My Tickets
             </Sidebar.Item>
           </Link>
+          {currentUser?.isAdmin && (
+            <>
+              <Link to='/dashboard?tab=buses' key="buses">
+                <Sidebar.Item
+                  active={tab === 'users'}
+                  
+                  as='div'
+                >
+                  Buses
+                </Sidebar.Item>
+              </Link>
+            </>  )}
           <Link to='/' key="">
             <Sidebar.Item
               active={tab === 'home'}
