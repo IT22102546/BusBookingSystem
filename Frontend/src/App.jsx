@@ -9,6 +9,7 @@ import PrivateRoute from './components/PrivateRoute';
 import DashBus from './components/DashBus';
 import BusAdd from './pages/BusAdd';
 import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute';
+import UpdateBus from './pages/UpdateBus';
 
 function App() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function App() {
         <Route element={<OnlyAdminPrivateRoute />}>
           <Route path="/addbus" element={<BusAdd />} />
           <Route path="/dashbus" element={<DashBus />} />
+          <Route path="/updatebus/:busId" element={<UpdateBus/>}/>
         </Route>
       </Routes>
     </div>

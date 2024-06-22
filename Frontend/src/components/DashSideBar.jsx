@@ -60,7 +60,7 @@ export default function DashSideBar() {
             <>
               <Link to='/dashboard?tab=buses' key="buses">
                 <Sidebar.Item
-                  active={tab === 'users'}
+                  active={tab === 'buses'}
                   
                   as='div'
                 >

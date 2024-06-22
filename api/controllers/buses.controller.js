@@ -13,14 +13,16 @@ export const create = async (req, res, next) => {
       seat,
       seatLayout,
       travelTime,
-      availability
+      availability,
+      startStation,
+      toStation
     } = req.body;
-    
+
     if (!req.user.isAdmin) {
       return next(errorHandler(403, 'You are not allowed to add Bus'));
     }
-   
-    if (!company || !busNumber || !price || !type || !arrivalTime || !departureTime || !seat || !seatLayout || !travelTime || !availability) {
+
+    if (!company || !busNumber || !price || !type || !arrivalTime || !departureTime || !seat || !seatLayout || !travelTime || !availability || !startStation || !toStation) {
       return next(errorHandler(400, 'Please provide all required fields'));
     }
 
@@ -31,7 +33,6 @@ export const create = async (req, res, next) => {
     if (!/^(3x2|2x2)$/.test(seatLayout)) {
       return next(errorHandler(400, 'Seat layout should be in 3x2 or 2x2 format'));
     }
-
 
     const slug = busNumber.split(' ').join('-').toLowerCase().replace(/[^a-zA-Z0-9-]/g, '');
     const newBus = new Bus({
@@ -87,10 +88,7 @@ export const getBuses = async (req, res, next) => {
     }
 
     const buses = await Bus.find(queryOptions);
-
-    res.status(200).json({
-      buses,
-    });
+    res.status(200).json({ buses });
   } catch (error) {
     next(error);
   }
@@ -109,7 +107,7 @@ export const getStations = async (req, res, next) => {
 export const deleteBus = async (req, res, next) => {
   try {
     if (!req.user.isAdmin) {
-      return next(errorHandler(403, 'You are not allowed to delete this post'));
+      return next(errorHandler(403, 'You are not allowed to delete this bus'));
     }
     await Bus.findByIdAndDelete(req.params.busId);
     res.status(200).json('The bus has been deleted');
@@ -118,3 +116,79 @@ export const deleteBus = async (req, res, next) => {
   }
 };
 
+
+export const getallBuses = async (req, res, next) => {
+  try {
+    const startIndex = parseInt(req.query.startIndex) || 0;
+    const limit = parseInt(req.query.limit) || 10;
+    const sortDirection = req.query.order === 'asc' ? 1 : -1;
+
+    const queryOptions = {};
+
+    if (req.query.searchTerm) {
+      queryOptions.$or = [
+        { company: { $regex: req.query.searchTerm, $options: 'i' } },
+        { startStation: { $regex: req.query.searchTerm, $options: 'i' } },
+        { toStation: { $regex: req.query.searchTerm, $options: 'i' } }
+      ];
+    }
+
+    const buses = await Bus.find(queryOptions)
+      .sort({ updatedAt: sortDirection })
+      .skip(startIndex)
+      .limit(limit);
+
+    res.status(200).json({ buses });
+  } catch (error) {
+    next(error);
+  }
+};
+export const updatebus = async (req, res, next) => {
+  try {
+    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+      return next(errorHandler(403, 'You are not allowed to update this bus'));
+    }
+
+    const updatedBus = await Bus.findByIdAndUpdate(
+      req.params.busId,
+      {
+        $set: {
+          company: req.body.company,
+          type: req.body.type,
+          busNumber: req.body.busNumber,
+          toStation: req.body.toStation,
+          price: req.body.price,
+          arrivalTime: req.body.arrivalTime,
+          departureTime: req.body.departureTime,
+          startStation: req.body.startStation,
+          seatLayout: req.body.seatLayout,
+          seat: req.body.seat,
+          image: req.body.image,
+          travelTime: req.body.travelTime,
+        },
+      },
+      { new: true }
+    );
+    if (!updatedBus) {
+      return next(errorHandler(404, 'Bus not found'));
+    }
+    res.status(200).json(updatedBus);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getBusById = async (req, res, next) => {
+  try {
+    const busId = req.params.busId;
+    const bus = await Bus.findById(busId);
+
+    if (!bus) {
+      return next(errorHandler(404, 'Bus not found'));
+    }
+
+    res.status(200).json(bus);
+  } catch (error) {
+    next(error);
+  }
+};

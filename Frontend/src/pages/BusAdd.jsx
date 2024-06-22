@@ -76,7 +76,7 @@ export default function BusAdd() {
   
         if (res.ok) {
           setPublishError(null);
-          navigate(`/dashbus`);
+          navigate(`/dashboard?tab=buses`);
         }
       } catch (error) {
         setPublishError('Something went wrong');
