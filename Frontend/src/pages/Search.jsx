@@ -219,8 +219,8 @@ export default function SearchBus() {
   
 
   return (
-    <div className="flex flex-col">
-      <div className="p-4 border-b border-gray-500 flex flex-col md:flex-row justify-center items-center text-center bg-green-300">
+    <div className="flex flex-col bg-slate-50">
+      <div className="p-4 border-b flex flex-col md:flex-row justify-center items-center text-center bg-white">
         <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 md:gap-8 w-full max-w-4xl">
           <div className="flex flex-col md:flex-row items-center gap-2 w-full">
             <label className="whitespace-nowrap font-cinzel font-semibold">From:</label>
@@ -270,7 +270,7 @@ export default function SearchBus() {
         </form>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-center bg-blue-100 p-4 font-cinzel ">
+      <div className="flex flex-col sm:flex-row justify-between items-center bg-slate-100 p-4 font-cinzel ">
   <div className="flex items-center mb-2 sm:mb-0">
     <div className="text-lg font-bold mr-5">Sorting By:</div>
     <div className="flex gap-4">
@@ -321,7 +321,7 @@ export default function SearchBus() {
 
 
       <div className="flex flex-col md:flex-row mt-5">
-        <div className="w-full md:w-1/5 p-4 border-r border-gray-500 bg-gray-200">
+        <div className="w-full md:w-1/5 p-4 border-r  bg-white">
           <h2 className="text-2xl font-semibold mb-4">Filters</h2>
           <div className="flex flex-col gap-4">
             <div className="bg-gray-300 rounded-md mb-2 p-3">
@@ -422,7 +422,7 @@ export default function SearchBus() {
           </div>
         </div>
         <div className="w-full md:w-4/5 items-center justify-center">
-          <h1 className="text-3xl font-semibold sm:border-b border-gray-500 p-3">Results</h1>
+          <h1 className="text-3xl font-semibold sm:border-b  p-3">Results</h1>
           <div className="p-7 flex flex-wrap gap-4  justify-center">
             {loading ? (
               <p className="text-xl text-gray-500">Loading...</p>
