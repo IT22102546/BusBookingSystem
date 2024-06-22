@@ -345,7 +345,7 @@ export default function SearchBus() {
         <div className="w-full md:w-1/5 p-4 border-r  bg-white">
           <h2 className="text-2xl font-semibold mb-4">Filters</h2>
           <div className="flex flex-col gap-4">
-            <div className="bg-gray-300 rounded-md mb-2 p-3">
+            <div className="bg-gray-200 rounded-md mb-2 p-3">
               <h3 className="font-semibold mb-2">Price Range</h3>
               <input
                 type="range"

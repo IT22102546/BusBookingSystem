@@ -34,7 +34,7 @@ export default function Header() {
             <div className="flex flex-col md:flex-row md:gap-2 md:order-2 w-full md:w-auto">
                 <div className="flex flex-wrap justify-center md:justify-start w-full md:w-auto">
                     <Link to="/" className="self-center whitespace-nowrap text-3xl font-semibold font-tangerine ml-0 md:ml-16">
-                        <img src="/img/logo2.jpg" alt="Logo" style={{ width: '100px', height: '50px' }} className='mr-2'/>
+                        <img src="/img/logogoway.jpg" alt="Logo" style={{ width: '100px', height: '50px' }} className='mr-2'/>
                     </Link>
                 </div>
                 <div className="flex flex-wrap justify-center md:justify-start w-full md:w-auto">
@@ -82,7 +82,7 @@ export default function Header() {
                         <DropdownItem onClick={handleSignOut}>Sign Out</DropdownItem>
                     </Dropdown>
                 ) : (
-                    <Link to='/signin' className="text-green-500 flex items-center mt-4 md:mt-0">
+                    <Link to='/signin' className="text-green-700 flex items-center mt-4 md:mt-0">
                         <HiUser className="mr-1" style={{ fontSize: '24px' }} />
                         Login/SignUp
                     </Link>
