@@ -192,3 +192,12 @@ export const getBusById = async (req, res, next) => {
     next(error);
   }
 };
+export const getCompanies = async (req, res, next) => {
+  try {
+    const companies = await Bus.distinct("company");
+    res.status(200).json({ companies });
+  } catch (error) {
+    next(error);
+  }
+};
+

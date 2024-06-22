@@ -23,6 +23,7 @@ export default function SearchBus() {
   const [sortOrder, setSortOrder] = useState("asc");
   const [startStations, setStartStations] = useState([]);
   const [toStations, setToStations] = useState([]);
+  const [companies, setCompanies] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,8 +43,24 @@ export default function SearchBus() {
       }
     };
 
+    const fetchCompanies = async () => {
+      try {
+        const res = await fetch("/api/buses/companies");
+        if (!res.ok) {
+          throw new Error("Failed to fetch companies");
+        }
+        const data = await res.json();
+        setCompanies(data.companies || []);
+      } catch (error) {
+        console.error("Error fetching companies:", error);
+      }
+    };
+
     fetchStations();
+    fetchCompanies();
   }, []);
+
+  
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -75,6 +92,8 @@ export default function SearchBus() {
     const sortedBuses = sortBuses(buses);
     setBuses(sortedBuses);
   }, [buses, sortBy, sortOrder]);
+
+  
   
 
   const fetchBuses = async (start, to, type, depTime, company) => {
@@ -102,6 +121,8 @@ export default function SearchBus() {
       setLoading(false);
     }
   };
+
+  
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -387,36 +408,12 @@ export default function SearchBus() {
             <div className="bg-gray-300 rounded-md mb-2 p-3">
               <h3 className="font-semibold mb-2">Bus Company</h3>
               <div className="flex flex-wrap gap-2">
-                <button 
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "NCG_Travels" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyCompanyFilter("NCG_Travels")}
-                >
-                  NCG Travels
+               
+              {companies.map((company) => (
+                <button key={company} onClick={() => applyCompanyFilter(company)} className="text-left mb-2 bg-white rounded-md h-10  pt-2 pb-2 pl-3 pr-3">
+                  {company}
                 </button>
-                <button 
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "DSG" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyCompanyFilter("DSG")}
-                >
-                  DSG Travels
-                </button>
-                <button 
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "Chamara" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyCompanyFilter("Chamara")}
-                >
-                  Chamara Travels
-                </button>
-                <button 
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "Aradhana" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyCompanyFilter("Aradhana")}
-                >
-                  Aradhana Travels
-                </button>
-                <button
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.company === "VKV_Travels" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyCompanyFilter("VKV_Travels")}
-                >
-                  VKV Travels
-                </button>
+              ))}
               </div>
             </div>
           </div>
