@@ -63,10 +63,9 @@ export default function UpdateBus() {
         setPublishError("Failed to fetch bus details");
       }
     };
-
+  
     fetchBus(); 
   }, [busId]);
-
   const handleUploadImage = () => {
     try {
       if (!file) {
