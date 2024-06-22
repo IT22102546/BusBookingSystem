@@ -57,17 +57,18 @@ export default function DashSideBar() {
             </Sidebar.Item>
           </Link>
           {currentUser?.isAdmin && (
-            <>
-              <Link to='/dashboard?tab=buses' key="buses">
-                <Sidebar.Item
-                  active={tab === 'buses'}
-                  
-                  as='div'
-                >
-                  Buses
-                </Sidebar.Item>
-              </Link>
-            </>  )}
+  <>
+          <Link to='/dashboard?tab=buses' key="buses">
+            <Sidebar.Item active={tab === 'buses'} as='div'>
+              <span className="flex items-center">
+                <img src="/img/bus.png" className="w-5 h-5 mr-2" alt="Bus icon"/>
+                Buses
+              </span>
+            </Sidebar.Item>
+          </Link>
+        </>
+      )}
+
           <Link to='/' key="">
             <Sidebar.Item
               active={tab === 'home'}
