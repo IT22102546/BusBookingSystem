@@ -126,7 +126,7 @@ export default function DashBus() {
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      <div className='flex justify-between'>
+      <div className='flex justify-between p-3'>
         <input
           type="text"
           placeholder="Search Buses.."
@@ -135,7 +135,7 @@ export default function DashBus() {
           className="px-3 py-2 w-150 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 mr-2 h-10 dark:bg-slate-800  placeholder-gray-500"
         />
         <Button 
-          gradientDuoTone='purpleToBlue'
+          className="bg-green-500"
           outline
           onClick={generatePDFReport}
         >
