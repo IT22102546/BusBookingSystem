@@ -62,7 +62,7 @@ export default function PostCard({ bus = {} }) {
             <span className="font-semibold text-slate-500 text-sm">Available Seat:</span>
             <span className="text-slate-500 text-sm">{seat}</span>
           </div>
-        <button className="bg-green-700 text-white px-4 py-2 rounded">Book Now</button>
+        <button className="bg-green-500 text-white px-4 py-2 rounded">Book Now</button>
       </div>
     </div>
   );
