@@ -241,7 +241,7 @@ export default function SearchBus() {
 
   return (
     <div className="flex flex-col bg-slate-50">
-      <div className="p-4 border-b flex flex-col md:flex-row justify-center items-center text-center bg-white shadow-lg rounded-lg ml-2 mr-2 mt-2 ">
+      <div className="p-4 border-b flex flex-col md:flex-row justify-center items-center text-center bg-white shadow-lg rounded-lg ml-2 mr-2 mt-2">
         <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4 md:gap-8 w-full max-w-4xl">
           <div className="flex flex-col md:flex-row items-center gap-2 w-full">
             <label className="whitespace-nowrap font-cinzel font-semibold">From:</label>
@@ -291,12 +291,12 @@ export default function SearchBus() {
         </form>
       </div>
 
-  <div className="flex flex-col sm:flex-row justify-between items-center bg-white p-4 font-cinzel rounded-lg border-spacing-2 shadow-lg ml-2 mr-2 border-gray-700 mt-2 ">
+  <div className="flex flex-col sm:flex-row justify-between items-center bg-white p-4 font-cinzel rounded-lg border-spacing-2 shadow-lg ml-2 mr-2 border-gray-500 mt-2 ">
   <div className="flex items-center mb-2 sm:mb-0">
     <div className="text-lg font-bold mr-5">Sorting By:</div>
     <div className="flex gap-4">
       <button
-        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "departureTime" ? "bg-blue-200" : ""}`}
+        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "departureTime" ? "bg-green-300" : ""}`}
         onClick={() => handleSortChange("departureTime")}
       >
         Departure Time
@@ -305,7 +305,7 @@ export default function SearchBus() {
         )}
       </button>
       <button
-        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "arrivalTime" ? "bg-blue-200" : ""}`}
+        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "arrivalTime" ? "bg-green-300" : ""}`}
         onClick={() => handleSortChange("arrivalTime")}
       >
         Arriving Time
@@ -314,7 +314,7 @@ export default function SearchBus() {
         )}
       </button>
       <button
-        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "price" ? "bg-blue-200" : ""}`}
+        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "price" ? "bg-green-300" : ""}`}
         onClick={() => handleSortChange("price")}
       >
         Price
@@ -323,7 +323,7 @@ export default function SearchBus() {
         )}
       </button>
       <button
-        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "seat" ? "bg-blue-200" : ""}`}
+        className={`px-4 py-2 border border-gray-300 rounded-lg ${sortBy === "seat" ? "bg-green-300" : ""}`}
         onClick={() => handleSortChange("seat")}
       >
         Available Seats
@@ -362,65 +362,79 @@ export default function SearchBus() {
               </div>
             </div>
             <div className="bg-gray-300 rounded-md mb-2 p-3">
-              <h3 className="font-semibold mb-2">Bus Type</h3>
-              <div className="flex gap-2">
-               
-                
-                
-                <button
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.type === "Normal" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyBusTypeFilter("Normal")}
-                >
-                  Normal
-                </button>
-                <button
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.type === "Ac" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyBusTypeFilter("Ac")}
-                >
-                  AC
-                </button>
-                
-              </div>
+            <h3 className="font-semibold mb-2">Bus Type</h3>
+            <div className="flex gap-2">
+              <button
+                className={`flex items-center gap-1 border border-gray-300 rounded-lg p-2 cursor-pointer ${
+                  filters.type === "Normal" ? "bg-green-200 text-black" : "bg-white text-black"
+                }`}
+                onClick={() => applyBusTypeFilter("Normal")}
+              >
+                Normal
+              </button>
+              <button
+                className={`flex items-center gap-1 border border-gray-300 rounded-lg p-2 cursor-pointer ${
+                  filters.type === "Ac" ? "bg-green-200 text-black" : "bg-white text-black"
+                }`}
+                onClick={() => applyBusTypeFilter("Ac")}
+              >
+                AC
+              </button>
             </div>
+          </div>
             <div className="bg-gray-300 rounded-md mb-2 p-3">
               <h3 className="font-semibold mb-2">Departure Time</h3>
               <div className="flex gap-2">
-                <button
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.departureTime === "0:00-10:00" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyDepartureTimeFilter("Before 10 AM")}
-                >
-                  Before 10 AM
-                </button>
-                <button
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.departureTime === "10:01-17:00" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyDepartureTimeFilter("10 AM - 5 PM")}
-                >
-                  10 AM - 5 PM
-                </button>
-                <button
-                  className={`flex items-center gap-1 bg-white border border-gray-300 rounded-lg p-2 cursor-pointer ${filters.departureTime === "17:01-24:00" ? "bg-blue-200" : ""}`}
-                  onClick={() => applyDepartureTimeFilter("After 5 PM")}
-                >
-                  After 5 PM
-                </button>
+              <button
+                className={`flex items-center gap-1 border border-gray-300 rounded-lg p-2 cursor-pointer ${
+                  filters.departureTime === "0:00-10:00" ? "bg-green-200 text-black" : "bg-white text-black"
+                }`}
+                onClick={() => applyDepartureTimeFilter("Before 10 AM")}
+              >
+                Before 10 AM
+              </button>
+
+              <button
+                className={`flex items-center gap-1 border border-gray-300 rounded-lg p-2 cursor-pointer ${
+                  filters.departureTime === "10:01-17:00" ? "bg-green-200 text-black" : "bg-white text-black"
+                }`}
+                onClick={() => applyDepartureTimeFilter("10 AM - 5 PM")}
+              >
+                10 AM - 5 PM
+              </button>
+
+              <button
+                className={`flex items-center gap-1 border border-gray-300 rounded-lg p-2 cursor-pointer ${
+                  filters.departureTime === "17:01-24:00" ? "bg-green-200 text-black" : "bg-white text-black"
+                }`}
+                onClick={() => applyDepartureTimeFilter("After 5 PM")}
+              >
+                After 5 PM
+              </button>
+
               </div>
             </div>
             <div className="bg-gray-300 rounded-md mb-2 p-3">
               <h3 className="font-semibold mb-2">Bus Company</h3>
               <div className="flex flex-wrap gap-2">
-               
-              {companies.map((company) => (
-                <button key={company} onClick={() => applyCompanyFilter(company)} className="text-left mb-2 bg-white rounded-md h-10  pt-2 pb-2 pl-3 pr-3">
-                  {company}
-                </button>
-              ))}
+                {companies.map((company) => (
+                  <button
+                    key={company}
+                    onClick={() => applyCompanyFilter(company)}
+                    className={`flex items-center gap-1 border border-gray-300 rounded-lg p-2 cursor-pointer ${
+                      filters.company === company ? "bg-green-200 text-black" : "bg-white text-black"
+                    }`}
+                  >
+                    {company}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
         </div>
-        <div className="w-full md:w-4/5 items-center justify-center ">
+        <div className="w-full md:w-4/5 items-center justify-center">
           <h1 className="text-3xl font-semibold sm:border-b  p-3">Routes</h1>
-          <div className="p-7 flex flex-wrap gap-4  justify-center max-w-screen-xl">
+          <div className="p-7 flex flex-wrap gap-4  justify-center w-full">
             {loading ? (
               <p className="text-xl text-gray-500">Loading...</p>
             ) : buses.length === 0 ? (
