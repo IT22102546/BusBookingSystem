@@ -140,21 +140,24 @@ export default function BusAdd() {
               }/>
              
           </div>
-          <div className='flex flex-col gap-4 sm:flex-row justify-between'>
-              <TextInput type="text" placeholder="Departure Time" id="departureTime"  onChange={(e) =>
+          <div className='flex flex-col  sm:flex-row gap-4'>
+              <TextInput className='w-80' type="text" placeholder="Departure Time (Add time in 00:00 format)" id="departureTime"  onChange={(e) =>
                 setFormData({ ...formData, departureTime: e.target.value })
               }/>
-              <TextInput type="text" placeholder="Arrival Time" id="arrivalTime"  onChange={(e) =>
+              <TextInput className='w-80' type="text" placeholder="Arrival Time (Add time in 00:00 format)" id="arrivalTime"  onChange={(e) =>
                 setFormData({ ...formData, arrivalTime: e.target.value })
               }/>
-               <TextInput type="text" placeholder="Travel Time" id="arrivalTime"  onChange={(e) =>
+              
+              
+             
+          </div>
+          <div className='flex flex-col gap-4 sm:flex-row '>
+          <TextInput type="text" placeholder="Travel Time" id="arrivalTime"  onChange={(e) =>
                 setFormData({ ...formData, travelTime: e.target.value })
               }/>
                <TextInput type="text" placeholder="Availability" id="availability"  onChange={(e) =>
                 setFormData({ ...formData, availability: e.target.value })
               }/>
-              
-             
           </div>
           <Button type='submit' className="bg-green-500">Add</Button>
           {publishError && (

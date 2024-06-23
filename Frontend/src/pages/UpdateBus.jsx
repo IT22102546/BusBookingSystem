@@ -259,6 +259,7 @@ export default function UpdateBus() {
             onChange={(e) => setFormData({ ...formData, availability: e.target.value })}
           />
         </div>
+        
 
         <Button type="submit" className="bg-green-500">
           Update
