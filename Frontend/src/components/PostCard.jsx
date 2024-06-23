@@ -19,8 +19,8 @@ export default function PostCard({ bus = {} }) {
   } = bus;
 
   return (
-    <div className="group relative border border-gray-300 h-64 overflow-hidden rounded-lg transition-all w-full md:w-4/5 p-6 flex flex-col justify-between bg-white shadow-lg">
-      <div className="flex flex-col gap-0">
+    <div className="group relative border border-gray-300  overflow-hidden rounded-lg transition-all  md:w-4/5 p-6 flex flex-col  bg-white shadow-lg">
+      <div className="flex flex-col gap-0  ">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
           <span className="text-lg font-bold">{type} - {company} - {busNumber} - {startStation} - {toStation}</span>
         </div>
@@ -45,7 +45,7 @@ export default function PostCard({ bus = {} }) {
             <span className='ml-4'><img src="/img/rightarrow.png" className="w-10 h-7 mx-2" alt="Arrow icon" /></span>
             <span className="font-semibold ml-3">{arrivalTime}</span>
           </div>
-          <div className="flex items-center gap-1 mt-2 sm:mt-0">
+          <div className="flex items-center gap-1 mt-2 sm:mt-0 ">
             <span className="text-slate-500 text-sm">{availability}</span>
           </div>
         </div>
@@ -57,8 +57,8 @@ export default function PostCard({ bus = {} }) {
           <span className="font-semibold text-sm text-slate-500">{toStation}</span>
         </div>
       </div>
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2">
-      <div className="flex items-center gap-1">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2 " >
+      <div className="flex items-center gap-1 ">
             <span className="font-semibold text-slate-500 text-sm">Available Seat:</span>
             <span className="text-slate-500 text-sm">{seat}</span>
           </div>

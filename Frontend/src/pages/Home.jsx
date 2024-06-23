@@ -183,11 +183,11 @@ export default function Home() {
         Your browser does not support the video tag.
     </video>
 
-    <div className="text-2xl text-left mt-6 ml-4 md:ml-16 px-4 md:px-20 text-black font-bold" style={{ position: 'relative', zIndex: '1' }}>
+    <div className="text-2xl text-left mt-6 ml-4 md:ml-16 px-4 md:px-20 text-black font-bold" style={{ position: 'relative', zIndex: '1', }}>
         Search For Bus Tickets
     </div>
-    <div className="flex items-center justify-center mt-6 w-full px-4 md:px-0" style={{ position: 'relative', zIndex: '1' }}>
-        <form className="flex flex-col md:flex-row bg-white h-auto md:h-28 w-full max-w-5xl rounded-md items-center p-4 shadow-md" onSubmit={handleSearch}>
+    <div className="flex items-center justify-center mt-6 w-full px-4 md:px-0" style={{ position: 'relative', zIndex: '1', }}>
+        <form className="flex flex-col md:flex-row bg-white h-auto md:h-28 w-full max-w-5xl rounded-md items-center p-4 shadow-md"   onSubmit={handleSearch}>
             <div className="flex-1 p-2 w-full">
                 <Select
                     className="w-full md:w-60"
